@@ -1,12 +1,9 @@
 import { ReactElement } from 'react';
-// _data
-import { _pricingHome } from '../_data/mock';
 // layouts
 import Layout from '../src/layouts';
 // components
 import { Page } from '../src/components';
 // sections
-import { PricingHome } from '../src/sections/pricing';
 import {
   HomeHero,
   HomeTopProjects,
@@ -36,8 +33,6 @@ export default function HomePage() {
       <HomeFeatureHighlights />
 
       <HomeForDesigner />
-
-      <PricingHome plans={_pricingHome} />
 
       <HomeCombination />
 
