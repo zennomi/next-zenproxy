@@ -80,7 +80,7 @@ export default function Header({ transparent }: Props) {
                 ...(isScrolling && { color: 'text.primary' }),
               }}
             /> */}
-{/* 
+            {/* 
             <LanguagePopover
               sx={{
                 ...(isScrolling && { color: 'text.primary' }),
@@ -91,7 +91,7 @@ export default function Header({ transparent }: Props) {
 
             {isDesktop && (
               <Stack direction="row" spacing={1}>
-                <NextLink href={Routes.registerIllustration} prefetch={false} passHref>
+                <NextLink href="https://github.com/zennomi" target="_blank" rel="noopener">
                   <Button
                     color="inherit"
                     variant="outlined"
@@ -106,7 +106,7 @@ export default function Header({ transparent }: Props) {
                   </Button>
                 </NextLink>
 
-                <Button variant="contained" href={Routes.buyNow} target="_blank" rel="noopener">
+                <Button variant="contained" href="https://www.facebook.com/Zennomi" target="_blank" rel="noopener">
                   Zennomi
                 </Button>
               </Stack>

@@ -7,6 +7,7 @@ const Routes = {
     manga: (sourceId: string, mangaId: string) => `/${sourceId}/${mangaId}`,
     chapter: (sourceId: string, mangaId: string, chapterId: string) =>
       `/${sourceId}/${mangaId}/${chapterId}`,
+    section: (sourceId: string, sectionId: string) => `/${sourceId}/${sectionId}`,
   },
   // Marketing
   marketing: {
@@ -77,6 +78,7 @@ const Routes = {
   buyNow: 'https://material-ui.com/store/items/zone-landing-page',
   figmaPreview:
     'https://www.figma.com/file/iAnp6x4J6YNvbVzdBnGM8P/%5BPreview%5D-Zone-Web?node-id=0%3A1',
+  fanpage: 'https://www.facebook.com/Zennomi'
 };
 
 export default Routes;

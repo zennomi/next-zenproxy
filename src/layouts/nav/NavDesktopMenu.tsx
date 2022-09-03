@@ -107,8 +107,6 @@ export default function NavDesktopMenu({
 
   const carouselList = lists.filter((list) => list.subheader !== 'Common');
 
-  const commonList = lists.filter((list) => list.subheader === 'Common')[0];
-
   const minList = lists.length > 5;
 
   const carouselSettings = {
@@ -241,26 +239,6 @@ export default function NavDesktopMenu({
           </Box>
         </Grid>
 
-        {/* Common List */}
-        <Grid
-          item
-          xs={3}
-          sx={{
-            borderLeft: (theme) => `dashed 1px ${theme.palette.divider}`,
-          }}
-        >
-          <List disablePadding sx={{ py: 6 }} component={MotionContainer}>
-            <ListSubheaderStyled>{commonList.subheader}</ListSubheaderStyled>
-            <Stack spacing={1.5} alignItems="flex-start">
-              {commonList.items.map((item) => {
-                const { title, path } = item;
-                const active = router.pathname === path;
-
-                return <LinkItem key={title} title={title} href={path} active={active} />;
-              })}
-            </Stack>
-          </List>
-        </Grid>
       </Grid>
     </DialogAnimate>
   );
