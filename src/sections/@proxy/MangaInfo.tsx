@@ -48,7 +48,7 @@ export default function MangaInfo({ manga }: Props) {
       </Stack>
       {
         isDesktop ?
-          <Typography variant='body2'>{desc}</Typography> :
+          <Typography variant='body2' sx={{ overflowWrap: 'anywhere' }}>{desc}</Typography> :
           <Accordion>
             <AccordionSummary
               expandIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
@@ -58,7 +58,7 @@ export default function MangaInfo({ manga }: Props) {
               <Typography>Tóm tắt</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant='body2'>{desc}</Typography>
+              <Typography variant='body2' sx={{ overflowWrap: 'anywhere' }}>{desc}</Typography>
             </AccordionDetails>
           </Accordion>
       }

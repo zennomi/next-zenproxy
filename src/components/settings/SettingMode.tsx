@@ -1,6 +1,3 @@
-// icons
-import asleepIcon from '@iconify/icons-carbon/asleep';
-import asleepFilled from '@iconify/icons-carbon/asleep-filled';
 // @mui
 import { styled } from '@mui/material/styles';
 import { ToggleButton, Typography } from '@mui/material';
@@ -36,8 +33,8 @@ export default function SettingMode() {
 
   return (
     <RootStyle value="check" selected={!isLight} onChange={onToggleMode}>
-      <Typography variant="subtitle2">Mode</Typography>
-      <Iconify icon={isLight ? asleepIcon : asleepFilled} />
+      <Typography variant="subtitle2">{isLight ? "Dark" : "Light"}</Typography>
+      <Iconify icon={isLight ? "eva:moon-fill" : "eva:sun-fill"} />
     </RootStyle>
   );
 }

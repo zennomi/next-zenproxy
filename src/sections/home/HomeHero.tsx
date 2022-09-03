@@ -100,11 +100,11 @@ export default function CareerLandingHero() {
                 </Typography>
               </Stack>
 
-              <BarStyle spacing={{ xs: 1, md: 0 }}>
-                {/* <CareerJobKeywordFilter
+              {/* <BarStyle spacing={{ xs: 1, md: 0 }}>
+                <CareerJobKeywordFilter
                   filterKeyword={filters.filterKeyword}
                   onChangeKeyword={handleChangeKeyword}
-                /> */}
+                />
                 <Divider
                   orientation="vertical"
                   sx={{
@@ -112,10 +112,10 @@ export default function CareerLandingHero() {
                     display: { xs: 'none', md: 'block' },
                   }}
                 />
-                {/* <CareerJobLocationsFilter
+                <CareerJobLocationsFilter
                   filterLocation={filters.filterLocation}
                   onChangeLocation={handleChangeLocation}
-                /> */}
+                />
                 <Button
                   size="large"
                   variant="contained"
@@ -126,7 +126,7 @@ export default function CareerLandingHero() {
                 >
                   <Iconify icon={searchIcon} sx={{ width: 24, height: 24 }} />
                 </Button>
-              </BarStyle>
+              </BarStyle> */}
 
               {/* <BrandsSection /> */}
               {/* <SummarySection /> */}

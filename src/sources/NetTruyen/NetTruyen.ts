@@ -19,10 +19,11 @@ import {
 import { proxyImage } from '../../utils/url';
 import { ZenSource } from '../types';
 import { Parser } from './NetTruyenParser';
+import { CheerioAPI } from 'cheerio';
 
 const DOMAIN = 'http://www.nettruyenn.com/';
 
-export const isLastPage = ($: CheerioStatic): boolean => {
+export const isLastPage = ($: CheerioAPI): boolean => {
   const current = $('ul.pagination > li.active > a').text();
   let total = $('ul.pagination > li.PagerSSCCells:last-child').text();
 
@@ -146,7 +147,7 @@ export class NetTruyen extends ZenSource {
     let $ = this.cheerio.load(data.data);
     const pages = this.parser.parseChapterDetails($);
     return createChapterDetails({
-      pages: pages.map(p => proxyImage(p, DOMAIN)),
+      pages: pages.map((p) => proxyImage(p, DOMAIN)),
       longStrip: false,
       id: chapterId,
       mangaId: mangaId,

@@ -1,4 +1,5 @@
 import { MangaTile, SearchRequest } from "paperback-extensions-common";
+import {CheerioAPI} from 'cheerio';
 
 const entities = require("entities"); //Import package for decoding HTML entities (unescape string)
 
@@ -12,7 +13,7 @@ export const generateSearch = (query: SearchRequest): string => {
     return encodeURI(keyword);
 }
 
-export const parseSearch = ($: CheerioStatic): MangaTile[] => {
+export const parseSearch = ($: CheerioAPI): MangaTile[] => {
     const collectedIds: string[] = [];
     const mangas: MangaTile[] = [];
     for (let obj of $('p:not(:first-child)', '.list').toArray()) {
@@ -33,7 +34,7 @@ export const parseSearch = ($: CheerioStatic): MangaTile[] => {
     return mangas;
 }
 
-export const parseViewMore = ($: CheerioStatic, select: Number): MangaTile[] => {
+export const parseViewMore = ($: CheerioAPI, select: Number): MangaTile[] => {
     const manga: MangaTile[] = [];
     const collectedIds: string[] = [];
     if (select === 1) {
@@ -76,7 +77,7 @@ export const parseViewMore = ($: CheerioStatic, select: Number): MangaTile[] => 
     return manga;
 }
 
-export const isLastPage = ($: CheerioStatic): boolean => {
+export const isLastPage = ($: CheerioAPI): boolean => {
     let isLast = false;
     const pages = [];
 

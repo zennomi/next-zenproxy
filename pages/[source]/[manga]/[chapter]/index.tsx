@@ -14,8 +14,17 @@ import ChapterBottomNav from '@/sections/@proxy/ChapterBottomNav';
 import ChapterTopNav from '@/sections/@proxy/ChapterTopNav';
 import { useRouter } from 'next/router';
 import Routes from '@/routes';
-import { useEffect } from 'react';
+import { styled } from '@mui/material';
+import { HEADER_MOBILE_HEIGHT, HEADER_DESKTOP_HEIGHT } from '../../../../src/config';
 
+const RootStyle = styled('div')(({ theme }) => ({
+    paddingTop: HEADER_MOBILE_HEIGHT,
+    paddingBottom: HEADER_MOBILE_HEIGHT,
+    [theme.breakpoints.up('md')]: {
+        paddingBottom: HEADER_DESKTOP_HEIGHT,
+        paddingTop: HEADER_DESKTOP_HEIGHT,
+    },
+}));
 
 // ----------------------------------------------------------------------
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -43,8 +52,9 @@ export default function MangaPage({ sourceId, mangaId, chapterId }: { sourceId: 
     if (!sourceId || !mangaId) {
         return <ErrorScreen />;
     }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const router = useRouter();
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: chapters } = useChapters(sourceId, mangaId);
     if (!chapters || chapters.length === 0) return <PageNotFound />
     let currentChapterId = router.query.chapter || chapterId;
@@ -56,8 +66,10 @@ export default function MangaPage({ sourceId, mangaId, chapterId }: { sourceId: 
     const chapter = chapters[chapterIndex];
     chapter.prevChapterId = chapterIndex < chapters.length - 1 ? chapters[chapterIndex + 1].id : undefined;
     chapter.nextChapterId = chapterIndex > 0 ? chapters[chapterIndex - 1].id : undefined;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: manga } = useManga(sourceId, mangaId);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: chapterDetails } = useChapter(sourceId, mangaId, chapter.id);
 
     const handleChapterChange = (newChapterId: string) => {
@@ -78,14 +90,16 @@ export default function MangaPage({ sourceId, mangaId, chapterId }: { sourceId: 
     };
 
     return (
-        <Page title={chapter.name ?? "RomCom iz da bezt..."}>
-            <ChapterTopNav />
-            {
-                chapterDetails?.pages.map(page =>
-                    <MangaImage src={page} key={page} sx={{ textAlign: 'center' }} />
-                )
-            }
-            <ChapterBottomNav chapters={chapters} chapter={chapter} handleChapterChange={handleChapterChange} />
+        <Page title={chapter.name + ' - ' + (manga?.titles[0] || '')}>
+            <RootStyle>
+                <ChapterTopNav />
+                {
+                    chapterDetails?.pages.map(page =>
+                        <MangaImage src={page} key={page} sx={{ textAlign: 'center' }} visibleByDefault={true}/>
+                    )
+                }
+                <ChapterBottomNav manga={manga} chapters={chapters} chapter={chapter} handleChapterChange={handleChapterChange} />
+            </RootStyle>
         </Page>
     );
 }

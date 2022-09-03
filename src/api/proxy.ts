@@ -11,7 +11,7 @@ export const getSection = async (
   sourceId: string,
   sectionId: string,
   page: number
-): Promise<ZenMangaTile[]> => {
+): Promise<{ results: ZenMangaTile[]; metadata: any }> => {
   const { data } = await axios.get(`/proxy/${sourceId}/sections/${sectionId}?page=${page}`);
   return data;
 };

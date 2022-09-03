@@ -1,5 +1,4 @@
 import { m } from 'framer-motion';
-import { MangaTile } from 'paperback-extensions-common';
 import NextLink from 'next/link';
 // @mui
 import { Typography, Box, Stack, IconButton, alpha, Link } from '@mui/material';
@@ -93,12 +92,12 @@ function LinkButton({ path, icon, external }: LinkButtonProps) {
         <Link href={path} target="_blank">
           <IconButton
             color="inherit"
-            sx={(theme) => ({
-              color: theme.palette.primary,
+            sx={{
+              color: (theme) => theme.palette.primary.main,
               '&:hover': {
-                bgcolor: alpha(theme.palette.primary.main, 0.4),
+                bgcolor: theme => alpha(theme.palette.primary.main, 0.4),
               },
-            })}
+            }}
           >
             <Iconify icon={icon} sx={{ width: { xs: 20, md: 30 }, height: { xs: 20, md: 30 } }} />
           </IconButton>
@@ -110,7 +109,7 @@ function LinkButton({ path, icon, external }: LinkButtonProps) {
             <IconButton
               color="inherit"
               sx={(theme) => ({
-                color: theme.palette.primary,
+                color: theme.palette.primary.main,
                 '&:hover': {
                   bgcolor: alpha(theme.palette.primary.main, 0.4),
                 },

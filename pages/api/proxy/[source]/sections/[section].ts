@@ -7,8 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const page = (req.query.page) ? Number(req.query.page) : 1;
   const source = SOURCES[<string>sourceId];
   try {
-    let data;
-    data = await source.getSection?.(<string>sectionId, page);
+    const data = await source.getSection?.(<string>sectionId, page);
     return res.send({results: data?.results.map(r => createZenMangaTile(source, r)) || [], metadata: data?.metadata});
   } catch (error) {
     console.log(error);

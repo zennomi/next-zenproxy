@@ -8,19 +8,36 @@ import { HEADER_DESKTOP_HEIGHT } from '../../config';
 import useOffSetTop from '../../hooks/useOffSetTop';
 
 import { ToolbarStyle, ToolbarShadowStyle } from './HeaderToolbarStyle';
-import { ZenChapter } from '../../sources/types';
+import { ZenChapter, ZenManga } from '../../sources/types';
 import { useResponsive } from '../../hooks';
 import { Iconify } from '../../components';
+import Routes from '../../routes';
 
 // ----------------------------------------------------------------------
 
 type Props = {
+    manga: ZenManga | undefined,
     chapters: ZenChapter[];
     chapter: ZenChapter;
     handleChapterChange: Function
 };
 
-export default function ChapterBottomNav({ chapters, chapter, handleChapterChange }: Props) {
+const ITEM_HEIGHT = 40;
+
+const MenuProps = {
+    PaperProps: {
+        sx: {
+            px: 1,
+            maxHeight: ITEM_HEIGHT * 10,
+            '& .MuiList-root': {
+                py: 0.5,
+            },
+            borderRadius: 0,
+        },
+    },
+};
+
+export default function ChapterBottomNav({ manga, chapters, chapter, handleChapterChange }: Props) {
     const isScrolling = useOffSetTop(HEADER_DESKTOP_HEIGHT);
     const isDesktop = useResponsive('up', 'md');
 
@@ -33,7 +50,7 @@ export default function ChapterBottomNav({ chapters, chapter, handleChapterChang
                         alignItems: 'center',
                         justifyContent: 'center',
                         width: "100%",
-                        columnGap: 2
+                        columnGap: { md: 2, xs: 1 }
                     }}
                 >
                     {
@@ -41,6 +58,11 @@ export default function ChapterBottomNav({ chapters, chapter, handleChapterChang
                             <BootstrapButton sx={{ borderRadius: '5px 0px 0px 5px', }} variant='outlined' disabled={!chapter.prevChapterId} onClick={() => handleChapterChange(chapter.prevChapterId)}>Chương trước</BootstrapButton> :
                             <BootstrapButton sx={{ borderRadius: '5px 0px 0px 5px', }} variant='outlined' disabled={!chapter.prevChapterId} onClick={() => handleChapterChange(chapter.prevChapterId)}><Iconify icon="eva:arrow-left-fill" /></BootstrapButton>
                     }
+                    <NextLink href={manga?.internalURL || '/'}>
+                        <BootstrapButton>
+                            <Iconify icon="eva:home-fill" />
+                        </BootstrapButton>
+                    </NextLink>
                     <FormControl size="small" sx={{ maxWidth: "50%" }}>
                         <Select
                             labelId="demo-simple-select-label"
@@ -48,6 +70,7 @@ export default function ChapterBottomNav({ chapters, chapter, handleChapterChang
                             value={chapter.id}
                             onChange={(event) => handleChapterChange(event.target.value)}
                             input={<BootstrapInput />}
+                            MenuProps={MenuProps}
                         >
                             {
                                 Object.values(chapters).map(chapter =>
@@ -76,7 +99,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
         borderRadius: 0,
         position: 'relative',
         backgroundColor: theme.palette.background.paper,
-        border: '1px solid ' + theme.palette.primary.main,
+        border: '1.5px solid ' + theme.palette.primary.main,
         color: theme.palette.primary.main,
         fontSize: 16,
         padding: '10px 26px 10px 12px',
@@ -103,6 +126,8 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 const BootstrapButton = styled(Button)(({ theme }) => ({
+    borderRadius: 0,
+    minWidth: 'unset',
     fontSize: 16,
     height: '45px',
     fontWeight: 400,
@@ -112,7 +137,7 @@ const BootstrapButton = styled(Button)(({ theme }) => ({
         height: '35px',
     },
     padding: '10px 12px',
-    border: '1px solid ' + theme.palette.primary.main,
+    border: '1.5px solid ' + theme.palette.primary.main,
     backgroundColor: theme.palette.background.paper,
     '&:hover': {
         color: theme.palette.background.paper,

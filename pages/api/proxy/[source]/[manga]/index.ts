@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import SOURCES from '@/sources';
-import { createZenManga, ZenManga } from '../../../../../src/sources/types';
+import { createZenManga } from '../../../../../src/sources/types';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const query = <string>req.query.source;

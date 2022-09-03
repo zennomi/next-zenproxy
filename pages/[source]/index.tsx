@@ -1,6 +1,4 @@
 import { ReactElement } from 'react';
-// _data
-import { _pricingHome } from '../../_data/mock';
 // layouts
 import Layout from '../../src/layouts';
 // components
@@ -19,7 +17,7 @@ import PageNotFound from '../404';
 export default function HomePage() {
   const router = useRouter();
   const { source: sourceId } = router.query;
-  const source = sources[sourceId as keyof Object];
+  const source = sources[String(sourceId)];
   return sourceId ? source ? (
     <Page title={source.name}>
       <SourceHero source={source} />

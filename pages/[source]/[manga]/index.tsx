@@ -12,11 +12,7 @@ import Layout from '../../../src/layouts';
 import { Page, ErrorScreen, Image } from '../../../src/components';
 // sections
 import sources from '../../../src/sources';
-import { Manga } from 'paperback-extensions-common';
-import axiosInstance from '../../../src/utils/axios';
 import MangaInfo from '../../../src/sections/@proxy/MangaInfo';
-import { ZenManga, ZenSource } from '../../../src/sources/types';
-import { useRequest } from '../../../src/hooks';
 import ChaptersList from '../../../src/sections/@proxy/ChaptersList';
 import { useChapters, useManga } from '../../../src/hooks/useProxy';
 import { getManga } from '../../../src/api/proxy';
@@ -59,10 +55,8 @@ export default function MangaPage({ sourceId, mangaId }: { sourceId: string, man
     if (!sourceId || !manga) {
         return <ErrorScreen />;
     }
-
-    const source = sources[sourceId];
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: chapters = [] } = useChapters(sourceId, mangaId);
-
     return (
         <Page title={manga.titles[0] ?? "RomCom iz da bezt..."}>
             <RootStyle>

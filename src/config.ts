@@ -32,11 +32,11 @@ export const defaultLocale = 'en';
 
 export const defaultSettings = {
   // light | dark
-  themeMode: 'light',
+  themeMode: 'dark',
   // ltr | rtl
   themeDirection: 'ltr',
   //  default | blueOrange | greenOrange | purpleTeal | cyanYellow | pinkCyan
-  themeColorPresets: 'default',
+  themeColorPresets: 'cyanYellow',
 } as SettingsValueProps;
 
 // LAYOUT

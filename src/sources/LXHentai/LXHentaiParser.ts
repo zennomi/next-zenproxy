@@ -1,4 +1,5 @@
 import { Tag, MangaTile, SearchRequest, TagSection } from "paperback-extensions-common";
+import {CheerioAPI} from 'cheerio';
 
 // const entities = require("entities"); //Import package for decoding HTML entities
 
@@ -12,7 +13,7 @@ export const generateSearch = (query: SearchRequest): string => {
     return encodeURI(keyword);
 }
 
-export const parseSearch = ($: CheerioStatic, query: any): MangaTile[] => {
+export const parseSearch = ($: CheerioAPI, query: any): MangaTile[] => {
     const manga: MangaTile[] = [];
     // const collectedIds: string[] = [];
     var loop = [];
@@ -42,7 +43,7 @@ export const parseSearch = ($: CheerioStatic, query: any): MangaTile[] => {
     return manga; //cái này trả về rỗng thì ko cộng dồn nữa
 }
 
-export const parseViewMore = ($: CheerioStatic): MangaTile[] => {
+export const parseViewMore = ($: CheerioAPI): MangaTile[] => {
     const manga: MangaTile[] = [];
     // const collectedIds: string[] = [];
     for (let obj of $('div.col-md-3', '.main .col-md-8 > .row').toArray()) {
@@ -66,7 +67,7 @@ export const parseViewMore = ($: CheerioStatic): MangaTile[] => {
     return manga; //cái này trả về rỗng thì ko cộng dồn nữa
 }
 
-export const parseTags = ($: CheerioStatic): TagSection[] => {
+export const parseTags = ($: CheerioAPI): TagSection[] => {
     const arrayTags: Tag[] = [];
     for (const obj of $("li", "ul").toArray()) {
         const label = ($("a", obj).text().trim());
@@ -81,7 +82,7 @@ export const parseTags = ($: CheerioStatic): TagSection[] => {
     return tagSections;
 }
 
-export const isLastPage = ($: CheerioStatic): boolean => {
+export const isLastPage = ($: CheerioAPI): boolean => {
     let isLast = false;
     const pages = [];
 

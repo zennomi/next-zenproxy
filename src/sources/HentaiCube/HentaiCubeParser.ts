@@ -1,6 +1,7 @@
 import { MangaTile, SearchRequest } from "paperback-extensions-common";
 
 const entities = require("entities"); //Import package for decoding HTML entities
+import {CheerioAPI} from 'cheerio';
 
 export interface UpdatedManga {
     ids: string[];
@@ -16,7 +17,7 @@ export const generateSearch = (query: SearchRequest): string => {
     return encodeURI(keyword);
 }
 
-export const parseSearch = ($: CheerioStatic, set: any): MangaTile[] => {
+export const parseSearch = ($: CheerioAPI, set: any): MangaTile[] => {
     const collectedIds: string[] = [];
     const mangas: MangaTile[] = [];
     if (set === 1) {
@@ -64,7 +65,7 @@ export const parseSearch = ($: CheerioStatic, set: any): MangaTile[] => {
     return mangas;
 }
 
-export const parseViewMore = ($: CheerioStatic, select: Number): MangaTile[] => {
+export const parseViewMore = ($: CheerioAPI, select: Number): MangaTile[] => {
     const manga: MangaTile[] = [];
     const collectedIds: string[] = [];
     if (select === 1 || select === 2 || select === 0) {
@@ -91,7 +92,7 @@ export const parseViewMore = ($: CheerioStatic, select: Number): MangaTile[] => 
     return manga;
 }
 
-export const isLastPage = ($: CheerioStatic): boolean => {
+export const isLastPage = ($: CheerioAPI): boolean => {
     let isLast = false;
     const pages = [];
 
