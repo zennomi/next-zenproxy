@@ -1,0 +1,23 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/500": "pages/500.html",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.html",
+  "/[source]": "pages/[source].html",
+  "/api/proxy/[source]/[manga]/chapters": "pages/api/proxy/[source]/[manga]/chapters.js",
+  "/api/proxy/[source]/[manga]": "pages/api/proxy/[source]/[manga].js",
+  "/api/proxy/[source]/sections/[section]": "pages/api/proxy/[source]/sections/[section].js",
+  "/auth/login-cover": "pages/auth/login-cover.html",
+  "/auth/register-illustration": "pages/auth/register-illustration.html",
+  "/auth/register-cover": "pages/auth/register-cover.html",
+  "/auth/login-illustration": "pages/auth/login-illustration.html",
+  "/api/proxy/[source]/[manga]/[chapter]": "pages/api/proxy/[source]/[manga]/[chapter].js",
+  "/auth/reset-password": "pages/auth/reset-password.html",
+  "/": "pages/index.html",
+  "/auth/verify-code": "pages/auth/verify-code.html",
+  "/coming-soon": "pages/coming-soon.html",
+  "/maintenance": "pages/maintenance.html",
+  "/[source]/[manga]/[chapter]": "pages/[source]/[manga]/[chapter].js",
+  "/[source]/[manga]": "pages/[source]/[manga].js"
+}
