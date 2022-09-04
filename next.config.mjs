@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     domains: ['flagcdn.com'],
   },
+  staticPageGenerationTimeout: 1000,
 };
 
 export default nextConfig;
