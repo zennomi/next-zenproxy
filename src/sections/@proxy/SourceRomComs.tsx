@@ -7,6 +7,7 @@ import { MangaTile, Source } from 'paperback-extensions-common';
 import { useRouter } from 'next/router';
 import { ZenSource } from '../../sources/types';
 import { useSection } from '../../hooks/useProxy';
+import { MangaTileSkeleton } from '@/components';
 
 // ----------------------------------------------------------------------
 
@@ -54,9 +55,12 @@ export default function SourceRomComs() {
                         },
                     }}
                 >
-                    {mangas.map((manga: MangaTile) => (
-                        <MangaTileCard key={manga.id} manga={manga} />
-                    ))}
+                    {mangas.length === 0 ?
+                        [...Array(10)].map((_, index) => <MangaTileSkeleton key={index} />)
+                        : mangas.map((manga: MangaTile) => (
+                            <MangaTileCard key={manga.id} manga={manga} />
+                        ))
+                    }
                 </Box>
             </Container>
         </RootStyle>

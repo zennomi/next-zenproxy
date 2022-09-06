@@ -9,7 +9,7 @@ import cssStyles from '../../utils/cssStyles';
 // hooks
 import { useBoundingClientRect } from '../../hooks';
 // components
-import { CarouselArrows, CarouselDots } from '../../components';
+import { CarouselArrows, CarouselDots, MangaTileSkeleton } from '../../components';
 //
 import MangaTileCard from '../../components/MangaTileCard';
 import { ZenSource } from '../../sources/types';
@@ -143,19 +143,35 @@ export default function HomeTopProjects({ source }: Props) {
                 }}
             >
                 <Slider ref={carouselRef} {...carouselSettings}>
-                    {mangas.slice(0, 10).map((manga: MangaTile) => (
-                        <Box
-                            key={manga.id}
-                            sx={{
-                                ml: '-1px',
-                                pl: { xs: 2, md: 4 },
-                                pr: { xs: 2, md: 0 },
-                                color: 'common.white',
-                            }}
-                        >
-                            <MangaTileCard manga={manga} />
-                        </Box>
-                    ))}
+                    {
+                        mangas.length === 0 ?
+                            [...Array(5)].map((_, index) =>
+                                <Box
+                                    key={index}
+                                    sx={{
+                                        ml: '-1px',
+                                        pl: { xs: 2, md: 4 },
+                                        pr: { xs: 2, md: 0 },
+                                        color: 'common.white',
+                                    }}
+                                >
+                                    <MangaTileSkeleton />
+                                </Box>
+                            )
+                            :
+                            mangas.slice(0, 10).map((manga: MangaTile) => (
+                                <Box
+                                    key={manga.id}
+                                    sx={{
+                                        ml: '-1px',
+                                        pl: { xs: 2, md: 4 },
+                                        pr: { xs: 2, md: 0 },
+                                        color: 'common.white',
+                                    }}
+                                >
+                                    <MangaTileCard manga={manga} />
+                                </Box>
+                            ))}
                 </Slider>
             </Box>
         </RootStyle>

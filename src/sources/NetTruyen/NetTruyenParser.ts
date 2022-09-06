@@ -1,3 +1,4 @@
+import { proxyImage } from '@/utils/url'
 import {
     Chapter,
     LanguageCode,
@@ -7,6 +8,8 @@ import {
     TagSection,
     MangaUpdates
 } from 'paperback-extensions-common'
+
+const DOMAIN = 'http://www.nettruyenn.com/';
 
 export class Parser {
 
@@ -59,7 +62,7 @@ export class Parser {
             artist: creator,
             desc: $('div.detail-content > p').text(),
             titles: [$('h1.title-detail').text()],
-            image: image ?? '',
+            image: proxyImage(image, DOMAIN) ?? '',
             status: $('li.status > p.col-xs-8').text().toLowerCase().includes("hoàn thành") ? 0 : 1,
             rating: parseFloat($('span[itemprop="ratingValue"]').text()),
             hentai: false,
@@ -114,7 +117,7 @@ export class Parser {
             if (!id || !title) continue;
             tiles.push(createMangaTile({
                 id: id,
-                image: !image ? "https://i.imgur.com/GYUxEX8.png" : 'http:' + image,
+                image: !image ? "https://i.imgur.com/GYUxEX8.png" : proxyImage('http:' + image, DOMAIN),
                 title: createIconText({ text: title }),
                 subtitleText: createIconText({ text: subtitle }),
             }));
