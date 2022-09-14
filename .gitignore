@@ -10,6 +10,7 @@
 
 # next.js
 /out/
+#/.next
 /.next/cache/*
 
 # production

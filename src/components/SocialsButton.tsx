@@ -6,8 +6,6 @@ import logoInstagram from '@iconify/icons-carbon/logo-instagram';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Stack, IconButton, Button, IconButtonProps, ButtonProps, Link } from '@mui/material';
-// @types
-import { SocialLinks } from '../@types/socials';
 //
 import Iconify from './Iconify';
 
@@ -18,7 +16,7 @@ type Props = IconButtonProps & ButtonProps;
 interface SocialsButtonProps extends Props {
   simple?: boolean;
   initialColor?: boolean;
-  links?: SocialLinks;
+  links?: any;
 }
 
 export default function SocialsButton({

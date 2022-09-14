@@ -1,21 +1,12 @@
-import { useState } from 'react';
-// icons
-import searchIcon from '@iconify/icons-carbon/search';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Typography, Stack, Container, Box, Grid, Divider, Button } from '@mui/material';
 // utils
 import cssStyles from '../../utils/cssStyles';
 import { fShortenNumber } from '../../utils/formatNumber';
-// @types
-import { CountriesProps } from '../../@types/map';
-import { JobFiltersProps } from '../../@types/career';
-// utils
-import { _brands } from '../../../_data/mock';
 // assets
 import { CareerHeroIllustration } from '../../assets';
 // components
-import { Iconify, SvgIconStyle } from '../../components';
 
 // ----------------------------------------------------------------------
 
@@ -54,27 +45,7 @@ const BarStyle = styled(Stack)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-type FiltersProps = Pick<JobFiltersProps, 'filterKeyword' | 'filterLocation'>;
-
 export default function CareerLandingHero() {
-  const [filters, setFilters] = useState<FiltersProps>({
-    filterKeyword: null,
-    filterLocation: null,
-  });
-
-  const handleChangeKeyword = (keyword: string | null) => {
-    setFilters({
-      ...filters,
-      filterKeyword: keyword,
-    });
-  };
-
-  const handleChangeLocation = (keyword: CountriesProps | null) => {
-    setFilters({
-      ...filters,
-      filterLocation: keyword,
-    });
-  };
 
   return (
     <RootStyle>
@@ -146,63 +117,7 @@ export default function CareerLandingHero() {
 
 const DividerStyle = <Divider orientation="vertical" flexItem sx={{ borderStyle: 'dashed' }} />;
 
-function BrandsSection() {
-  return (
-    <Stack
-      flexWrap="wrap"
-      direction={{ md: 'row' }}
-      alignItems={{ md: 'center' }}
-      sx={{ pt: { md: 1 } }}
-    >
-      {_brands.slice(0, 4).map((brand) => (
-        <Box
-          key={brand.id}
-          sx={{
-            lineHeight: 0,
-            my: { xs: 1.5, md: 0.5 },
-            mr: { md: 3 },
-            width: { xs: 0.5, md: 'auto' },
-            '&:last-of-type': {
-              mr: 0,
-            },
-          }}
-        >
-          <SvgIconStyle
-            src={brand.image}
-            sx={{
-              width: 94,
-              height: 28,
-              opacity: 0.8,
-              color: 'grey.500',
-            }}
-          />
-        </Box>
-      ))}
-    </Stack>
-  );
-}
-
 // ----------------------------------------------------------------------
-
-function SummarySection() {
-  return (
-    <Stack
-      spacing={3}
-      direction={{ xs: 'column', md: 'row' }}
-      divider={DividerStyle}
-      sx={{ pt: { md: 5 } }}
-    >
-      <Stack spacing={{ md: 3 }} direction="row" divider={DividerStyle}>
-        {SummaryItem(2000000, 'Jobs')}
-        {SummaryItem(500000, 'Successful Hiring')}
-      </Stack>
-      <Stack spacing={{ md: 3 }} direction="row" divider={DividerStyle}>
-        {SummaryItem(250000, 'Partners')}
-        {SummaryItem(156000, 'Employee')}
-      </Stack>
-    </Stack>
-  );
-}
 
 function SummaryItem(total: number, label: string) {
   return (

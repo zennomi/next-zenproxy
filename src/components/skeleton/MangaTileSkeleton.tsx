@@ -1,9 +1,9 @@
 import { m } from 'framer-motion';
 // @mui
-import { Skeleton, Stack, Card, Divider, Box, CardProps, BoxProps } from '@mui/material';
+import { Skeleton, Box } from '@mui/material';
 // components
 import { varHover, varTranHover } from '../animate';
-import { Image, BgOverlay, Iconify, TextMaxLine } from '..';
+import { Image, BgOverlay } from '..';
 
 export default function MangaTileSkeleton() {
     return (
@@ -36,7 +36,7 @@ export default function MangaTileSkeleton() {
                             position: 'absolute',
                             justifyContent: 'center',
                         }}
-                    ></Box>
+                    />
                 </BgOverlay>
                 <m.div variants={varHover(1.15)} transition={varTranHover()}>
                     <Image src={""} alt={"skeleton"} ratio="3/4" />
