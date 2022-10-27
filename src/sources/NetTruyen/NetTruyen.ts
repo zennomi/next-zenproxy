@@ -103,7 +103,7 @@ export class NetTruyen extends ZenSource {
         request.headers = {
           ...(request.headers ?? {}),
           ...{
-            referer: DOMAIN,
+            // referer: DOMAIN,
           },
         };
 

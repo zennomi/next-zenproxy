@@ -95,7 +95,7 @@ export default function MangaPage({ sourceId, mangaId, chapterId }: { sourceId: 
                 <ChapterTopNav />
                 {
                     chapterDetails?.pages.map(page =>
-                        <MangaImage src={page} key={page} sx={{ textAlign: 'center' }} visibleByDefault={true}/>
+                        <MangaImage src={page} key={page} sx={{ textAlign: 'center' }} />
                     )
                 }
                 <ChapterBottomNav manga={manga} chapters={chapters} chapter={chapter} handleChapterChange={handleChapterChange} />

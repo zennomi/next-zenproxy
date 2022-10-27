@@ -135,8 +135,7 @@ function MangaPage({ sourceId , mangaId , chapterId  }) {
                         src: page,
                         sx: {
                             textAlign: "center"
-                        },
-                        visibleByDefault: true
+                        }
                     }, page)
                 ),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_sections_proxy_ChapterBottomNav__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, {

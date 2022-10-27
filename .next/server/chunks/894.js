@@ -3539,7 +3539,6 @@ class NetTruyen extends types/* ZenSource */.bp {
                 request.headers = {
                     ...request.headers ?? {},
                     ...{
-                        referer: NetTruyen_DOMAIN
                     }
                 };
                 return request;

@@ -20,7 +20,7 @@
   "/imouto": "pages/imouto.html",
   "/": "pages/index.html",
   "/maintenance": "pages/maintenance.html",
-  "/[source]/[manga]": "pages/[source]/[manga].js",
+  "/_error": "pages/_error.js",
   "/[source]/[manga]/[chapter]": "pages/[source]/[manga]/[chapter].js",
-  "/_error": "pages/_error.js"
+  "/[source]/[manga]": "pages/[source]/[manga].js"
 }
