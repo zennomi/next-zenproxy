@@ -44,7 +44,7 @@ export default function Tool() {
     const handleCheckPrice: FormEventHandler = (event) => {
         event.preventDefault();
         setCount(count => count + 1);
-        const rate = isMercari ? 175 : 171;
+        const rate = isMercari ? 179 : 176;
         let profit;
         if (count > 10 + price % 10) {
             setCount(0);
