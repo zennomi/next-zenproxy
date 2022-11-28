@@ -21,6 +21,6 @@
   "/": "pages/index.html",
   "/maintenance": "pages/maintenance.html",
   "/_error": "pages/_error.js",
-  "/[source]/[manga]": "pages/[source]/[manga].js",
-  "/[source]/[manga]/[chapter]": "pages/[source]/[manga]/[chapter].js"
+  "/[source]/[manga]/[chapter]": "pages/[source]/[manga]/[chapter].js",
+  "/[source]/[manga]": "pages/[source]/[manga].js"
 }
