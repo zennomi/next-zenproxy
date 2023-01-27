@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/ltYkO7o37u0qBNN9FhF8f/_buildManifest.js",
-    "static/ltYkO7o37u0qBNN9FhF8f/_ssgManifest.js",
-    "static/ltYkO7o37u0qBNN9FhF8f/_middlewareManifest.js"
+    "static/885XerxGn2voEbmefgskA/_buildManifest.js",
+    "static/885XerxGn2voEbmefgskA/_ssgManifest.js",
+    "static/885XerxGn2voEbmefgskA/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -179,6 +179,12 @@
       "static/chunks/733-a944bcfd9d68e16d.js",
       "static/chunks/pages/auth/verify-code-13e652cf767a2c33.js"
     ],
+    "/biya": [
+      "static/chunks/webpack-de6f4a74f55ea8ee.js",
+      "static/chunks/framework-0ba0ddd33199226d.js",
+      "static/chunks/main-deb732c9f81f04c3.js",
+      "static/chunks/pages/biya-715ba9de039db513.js"
+    ],
     "/coming-soon": [
       "static/chunks/webpack-de6f4a74f55ea8ee.js",
       "static/chunks/framework-0ba0ddd33199226d.js",
@@ -195,7 +201,7 @@
       "static/chunks/211-4d0ede7c21880573.js",
       "static/chunks/830-ab77618f1a19e0de.js",
       "static/chunks/922-5c61466572b1d170.js",
-      "static/chunks/pages/imouto-1b6971b551941a36.js"
+      "static/chunks/pages/imouto-57b3a688de28102f.js"
     ],
     "/imouto/[source]": [
       "static/chunks/webpack-de6f4a74f55ea8ee.js",
