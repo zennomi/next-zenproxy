@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/885XerxGn2voEbmefgskA/_buildManifest.js",
-    "static/885XerxGn2voEbmefgskA/_ssgManifest.js",
-    "static/885XerxGn2voEbmefgskA/_middlewareManifest.js"
+    "static/M27WGgNTOqJPf3MIJc7ay/_buildManifest.js",
+    "static/M27WGgNTOqJPf3MIJc7ay/_ssgManifest.js",
+    "static/M27WGgNTOqJPf3MIJc7ay/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -183,7 +183,7 @@
       "static/chunks/webpack-de6f4a74f55ea8ee.js",
       "static/chunks/framework-0ba0ddd33199226d.js",
       "static/chunks/main-deb732c9f81f04c3.js",
-      "static/chunks/pages/biya-715ba9de039db513.js"
+      "static/chunks/pages/biya-aed74a5d731d9881.js"
     ],
     "/coming-soon": [
       "static/chunks/webpack-de6f4a74f55ea8ee.js",

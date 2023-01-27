@@ -23,7 +23,14 @@ export default function BiyaPage() {
     };
 
     return <>
-        <Head><title>Văn mẫu Bicon - Zennomi</title></Head>
+        <Head>
+            <title>Văn mẫu Bicon - Zennomi</title>
+            <meta property="og:title" content="Văn mẫu Bicon - Zennomi" />
+            <meta property="og:type" content="article" />
+            <meta property="og:image" content="https://c1.kemono.party/data/e0/20/e020d21be07c0516bee0753a9ea1801619f57cdaaae82bf82f77b9d4ba7d2662.jpg?f=fe12071e-3cc1-423f-bb96-9964f5c464d5.jpg" />
+            <meta property="og:url" content="https://zenno.moe/biya/" />
+            <meta property="og:description" content="Mẫu hội thoại giúp nâng tầm fan Việt Nam trong mắt Biya" />
+        </Head>
         <Container sx={{ py: 2 }}>
             <Stack spacing={2}>
                 <Typography variant='h3'>
