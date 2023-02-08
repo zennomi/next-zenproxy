@@ -5,6 +5,7 @@ import NextLink from "next/link";
 import { ReactElement, useState } from "react";
 import { Image, Page } from "../../src/components";
 import * as config from "../../src/config";
+import useCuuTromChapter from "../../src/hooks/useCuuTromChapter";
 import Layout from "../../src/layouts";
 
 const RootStyle = styled('div')(({ theme }) => ({
@@ -25,31 +26,22 @@ const RootStyle = styled('div')(({ theme }) => ({
 export default function CuuTromPage() {
     const [value, setValue] = useState<string>("")
     const [error, setError] = useState<string>("")
-    const [loading, setLoading] = useState<boolean>(false)
-    const [chapter, setChapter] = useState<any>()
-    console.log(chapter)
+    const [path, setPath] = useState<string>("")
+
+    const { data, isLoading, fetchStatus } = useCuuTromChapter(path)
+
     const handleChange = async (event: any) => {
         setValue((event.target.value))
         setError("")
     }
 
     const handleClick = async () => {
-        const url = new URL(value)
-        const path = url.pathname;
-        if (/mangas\/\d{1,}\/chapters\/\d{1,}/.test(path)) {
-            setLoading(true)
-            const { data } = await axios({
-                method: "get",
-                url: `${config.CUUTROM_API}${path}`
-            })
-            setLoading(false)
-            if (data.error) {
-                setError(data.messgae)
-            } else {
-                setChapter(data.chapter)
-            }
-        } else {
-            setError("Link không hợp lệ")
+        try {
+            const url = new URL(value)
+            if (!/mangas\/\d{1,}\/chapters\/\d{1,}/.test(url.pathname)) throw new Error('Link không hợp lệ')
+            setPath(url.pathname)
+        } catch (error) {
+            setError('Link không hợp lệ')
         }
     }
 
@@ -57,28 +49,35 @@ export default function CuuTromPage() {
         <Page title="Cứu Trộm">
             <RootStyle>
                 <Typography>
-                    Link truyện cuutrom, ID truyện,...
+                    Link chương cuutruyen.net, ID truyện,...
                 </Typography>
-                <div>
-                    <OutlinedInput
-                        value={value}
-                        onChange={handleChange}
-                        fullWidth
-                        endAdornment={
-                            <Button variant="contained" onClick={handleClick}>
-                                Crawl
-                            </Button>} />
-                </div>
+                <OutlinedInput
+                    value={value}
+                    onChange={handleChange}
+                    fullWidth
+                    endAdornment={
+                        <Button variant="contained" onClick={handleClick}>
+                            Crawl
+                        </Button>}
+                    error={!!error}
+                    sx={{ maxWidth: 500 }}
+                />
+                {error && <Typography color="error.main">{error}</Typography>}
                 <Box>
                     {
-                        loading ?
-                            <CircularProgress />
-                            : chapter && <Card sx={{ width: "300px" }}>
-                                <Image ratio="3/4" src={chapter.manga.cover_url} />
-                                <CardHeader title={chapter.name || chapter.manga.name}/>
+                        isLoading ?
+                            fetchStatus !== 'idle' ?
+                                <>
+                                    <CircularProgress />
+                                    <Typography>Đang đi trộm, vui lòng đợi...</Typography>
+                                </>
+                                : <></>
+                            : data?.chapter && <Card sx={{ width: "300px" }}>
+                                <Image ratio="3/4" src={data.chapter.manga.cover_url} />
+                                <CardHeader title={data.chapter.name || data.chapter.manga.name} />
                                 <CardContent>
-                                    <NextLink href={`/cuutrom/${value}`} passHref>
-                                        <Link>Chương {chapter.number} - {chapter.pages.length} trang</Link>
+                                    <NextLink href={`/cuutrom/${path}`} passHref>
+                                        <Link>Chương {data.chapter.number} - {data.chapter.pages.length} trang</Link>
                                     </NextLink>
                                 </CardContent>
                             </Card>
