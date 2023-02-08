@@ -61,7 +61,7 @@ export default function HomeSources() {
                         },
                     }}
                 >
-                    {Object.values(sources).map((source) => (
+                    {Object.values(sources).filter(source => ["nhentai", "mangadex"].includes(source.id)).map((source) => (
                         <SourceItem key={source.name} source={source} />
                     ))}
                 </Box>

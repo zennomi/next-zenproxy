@@ -42,12 +42,6 @@ export default function HeaderSimple({ transparent }: Props) {
             divider={<Divider orientation="vertical" sx={{ height: 24 }} />}
             spacing={2.5}
           >
-            <LanguagePopover
-              sx={{
-                ...(isScrolling && { color: 'text.primary' }),
-              }}
-            />
-
             <NextLink href={Routes.support} passHref>
               <Link
                 color="inherit"

@@ -9,6 +9,8 @@ export const HOST_API = {
   production: process.env.PRODUCTION_API,
 };
 
+export const CUUTROM_API = process.env.CUUTROM_API;
+
 export const GOOGLE_API = process.env.GOOGLE_API;
 
 // MARKDOWN FILE DIRECTORY
