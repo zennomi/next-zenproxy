@@ -1,5 +1,31 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
+<<<<<<< HEAD
   "/_document": "pages/_document.js"
+=======
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html",
+  "/500": "pages/500.html",
+  "/[source]": "pages/[source].html",
+  "/api/imouto/[source]/sections/[section]": "pages/api/imouto/[source]/sections/[section].js",
+  "/api/proxy/[source]/[manga]/[chapter]": "pages/api/proxy/[source]/[manga]/[chapter].js",
+  "/api/proxy/[source]/[manga]/chapters": "pages/api/proxy/[source]/[manga]/chapters.js",
+  "/api/proxy/[source]/[manga]": "pages/api/proxy/[source]/[manga].js",
+  "/api/proxy/[source]/sections/[section]": "pages/api/proxy/[source]/sections/[section].js",
+  "/auth/login-cover": "pages/auth/login-cover.html",
+  "/auth/login-illustration": "pages/auth/login-illustration.html",
+  "/auth/register-cover": "pages/auth/register-cover.html",
+  "/auth/register-illustration": "pages/auth/register-illustration.html",
+  "/auth/reset-password": "pages/auth/reset-password.html",
+  "/auth/verify-code": "pages/auth/verify-code.html",
+  "/biya": "pages/biya.html",
+  "/coming-soon": "pages/coming-soon.html",
+  "/imouto/[source]": "pages/imouto/[source].html",
+  "/imouto": "pages/imouto.html",
+  "/": "pages/index.html",
+  "/maintenance": "pages/maintenance.html",
+  "/[source]/[manga]/[chapter]": "pages/[source]/[manga]/[chapter].js",
+  "/[source]/[manga]": "pages/[source]/[manga].js"
+>>>>>>> ba223ea2ddb280156a01d4923e55a7e56ca3ad3b
 }
