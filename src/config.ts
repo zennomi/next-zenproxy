@@ -11,6 +11,8 @@ export const HOST_API = {
 
 export const CUUTROM_API = process.env.CUUTROM_API;
 
+export const ROMCOM_API = process.env.ROMCOM_API;
+
 export const GOOGLE_API = process.env.GOOGLE_API;
 
 // MARKDOWN FILE DIRECTORY

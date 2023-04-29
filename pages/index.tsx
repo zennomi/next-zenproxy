@@ -44,5 +44,5 @@ export default function HomePage() {
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout transparentHeader simpleFooter>{page}</Layout>;
+  return <Layout simpleFooter>{page}</Layout>;
 };

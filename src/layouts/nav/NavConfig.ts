@@ -14,10 +14,11 @@ export const PageLinks = Object.values(sources).map((source, index) => ({
 
 export const navConfig = [
   { title: 'Trang chủ', path: '/' },
+  { title: 'Thư viện', path: Routes.romcom.titles },
   {
     title: 'Các nguồn',
     path: Routes.proxy.source('[source]'),
     children: PageLinks,
   },
-  { title: 'About Me', path: Routes.fanpage },
+  { title: 'Imouto Store', path: '/imouto' },
 ];

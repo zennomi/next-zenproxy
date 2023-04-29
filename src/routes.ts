@@ -1,6 +1,12 @@
 // ----------------------------------------------------------------------
 
 const Routes = {
+  // romcom
+  romcom: {
+    titles: '/romcom',
+    viewTitle: (id: string) => `/romcom/${id}`,
+  },
+
   //
   proxy: {
     source: (sourceId: string) => `/${sourceId}`,
