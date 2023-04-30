@@ -1,7 +1,7 @@
-import { Box, Container, Grid, Pagination, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { Breadcrumbs, Page } from "../../src/components";
+import { Box, Button, Container, Grid, Pagination, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Breadcrumbs, Iconify, Page } from "../../src/components";
 import { TYPE_OPTION } from "../../src/constants";
-import { ReactElement, useRef } from "react";
+import { ReactElement, useRef, useState } from "react";
 import Layout, { RootStyle } from "../../src/layouts";
 import { useTitles } from "../../src/hooks/useRomcom";
 import { useRouter } from "next/router";
@@ -9,11 +9,13 @@ import { ParsedUrlQuery, stringify } from "querystring";
 import TitleCardSkeleton from "../../src/components/TitleCardSkeleton";
 import TitleCard from "../../src/components/TitleCard";
 import EmptyContent from "../../src/components/EmptyContent";
+import TitleFilterDrawer from "../../src/sections/romcom/TitleFilterDrawer";
 
 export default function RomcomPage() {
     const toggleButtonRef = useRef(null);
-    const { query, push } = useRouter();
-    const { data, isLoading, error } = useTitles(stringify(query));
+    const { query, push, isReady } = useRouter();
+    const { data, isLoading, error } = useTitles(stringify(query), isReady);
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const handlePageChange = (event: any, page: number) => {
         updateQuery({ ...query, page: page.toString() })
@@ -21,7 +23,7 @@ export default function RomcomPage() {
 
     const handleTypeClick = (event: any, _type: string) => {
         if (!_type) updateQuery({ type: undefined, page: '1' });
-        else updateQuery({ type: _type, page: '1' });
+        else updateQuery({ ...query, type: _type, page: '1' });
     }
 
     const updateQuery = (query: ParsedUrlQuery) => {
@@ -46,7 +48,7 @@ export default function RomcomPage() {
                         exclusive
                         onChange={handleTypeClick}
                         fullWidth
-                        sx={{ mb: 3 }}
+                        sx={{ my: 2 }}
                     >
                         {
                             TYPE_OPTION.map(_type => (
@@ -59,6 +61,9 @@ export default function RomcomPage() {
                             ))
                         }
                     </ToggleButtonGroup>
+                    <Box sx={{ display: 'flex', justifyContent: "end", mb: 2 }}>
+                        <Button size="small" startIcon={<Iconify icon="ic:round-filter-list" />} onClick={() => setIsFilterOpen(true)}>Bộ lọc</Button>
+                    </Box>
                     <Grid container spacing={3}>
                         {
                             isLoading ? Array(24).fill(
@@ -79,6 +84,7 @@ export default function RomcomPage() {
                     </Box>
                 </Container>
             </RootStyle>
+            {isReady && <TitleFilterDrawer isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />}
         </Page>
     )
 }

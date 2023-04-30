@@ -30,7 +30,7 @@ const lanCodeToIcon: Record<string, string> = {
 export default function TitleLinks({ links = [] }: { links: TitleLink[] | undefined}) {
     return (
         <Card>
-            <Scrollbar sx={{ maxHeight: 200, my: 1 }}>
+            <Scrollbar sx={{ maxHeight: 500, my: 1 }}>
                 <TableContainer>
                     <Table>
                         <TableHead>
