@@ -28,15 +28,15 @@ export default function HomePage() {
 
       <HomeTopProjects />
 
-      <HomeFlexibleComponents />
+      {/* <HomeFlexibleComponents /> */}
 
-      <HomeFeatureHighlights />
+      {/* <HomeFeatureHighlights /> */}
 
       <HomeForDesigner />
 
-      <HomeCombination />
+      {/* <HomeCombination /> */}
 
-      <HomeAdvertisement />
+      {/* <HomeAdvertisement /> */}
     </Page>
   );
 }

@@ -60,14 +60,14 @@ export default function CareerLandingHero() {
             >
               <Stack spacing={3}>
                 <Typography variant="h1" sx={{ color: 'common.white' }}>
-                  Đọc{' '}
+                  Bố đọc{' '}
                   <Box component="span" sx={{ color: 'primary.main' }}>
                     RomCom
                   </Box>{' '}
-                  Ở Mọi Trang
+                  OK?
                 </Typography>
                 <Typography sx={{ color: 'grey.500' }}>
-                  Địt mẹ trang nào cũng toàn đánh đấm, manhwa, manhua, yuri boylove cút cút. Anh em tao đọc romcom.
+                  From Zenlỏmi - Loser đọc romcom số 1 Việt Nam
                 </Typography>
               </Stack>
 

@@ -38,12 +38,12 @@ export default function HomeSources() {
                 >
                     <Grid item xs={12} md={4}>
                         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-                            Các nguồn truyện
+                            Lọc truyện ngọt
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={8}>
                         <Typography variant="h3">
-                            Nguồn truyện từ nhiều nguồn uy tín, đã lọc các bộ Manhwa Mahua đánh đấm...
+                            Nói đéo với isekai fantasy đánh đấm, harem rác, NTR thượng đắng. Ngọt và only ngọt.
                         </Typography>
                     </Grid>
                 </Grid>

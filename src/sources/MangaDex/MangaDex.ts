@@ -76,7 +76,7 @@ export const MangaDexInfo: SourceInfo = {
 
 export class MangaDex extends ZenSource {
   id = 'mangadex';
-  description = 'Extension that pulls manga from MangaDex';
+  description = 'Lọc manga romcom mới được cập nhật trên Mangadex';
   icon = 'MangaDex.png';
   name = 'mangadex';
   websiteBaseURL = 'https://mangadex.org';
@@ -95,6 +95,27 @@ export class MangaDex extends ZenSource {
     switch (sectionId) {
       case 'top':
         return this.getViewMoreItems('popular', { offset });
+      case 'top_romcom':
+        url = new URLBuilder(this.MANGADEX_API)
+          .addPathComponent('manga')
+          .addQueryParameter('limit', 100)
+          .addQueryParameter('order', { followedCount: 'desc' })
+          .addQueryParameter('offset', offset)
+          .addQueryParameter('includes', ['cover_art'])
+          .addQueryParameter(
+            'includedTags',
+            includedTags?.map((x) => x.id)
+          )
+          .addQueryParameter(
+            'excludedTags',
+            excludedTags?.map((x) => x.id)
+          )
+          .addQueryParameter('order', { rating: 'desc' })
+          .addQueryParameter('availableTranslatedLanguage', languages)
+          .addQueryParameter('originalLanguage', ['ja'])
+          .addQueryParameter('hasAvailableChapters', true)
+          .buildUrl();
+        break; 
       case 'new_romcom':
         url = new URLBuilder(this.MANGADEX_API)
           .addPathComponent('manga')

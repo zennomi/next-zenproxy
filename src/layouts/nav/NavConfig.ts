@@ -5,7 +5,7 @@ import { _tours, _jobs, _courses } from '../../../_data/mock';
 import sources from '../../sources';
 
 // ----------------------------------------------------------------------
-export const PageLinks = Object.values(sources).map((source, index) => ({
+export const PageLinks = Object.values(sources).filter(s => ['mangadex', 'nhentai'].includes(s.id)).map((source, index) => ({
   order: index,
   subheader: source.id,
   cover: `/logo/${source.icon}`,

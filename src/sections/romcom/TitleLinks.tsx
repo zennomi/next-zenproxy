@@ -52,7 +52,7 @@ export default function TitleLinks({ links = [] }: { links: TitleLink[] | undefi
 }
 
 function LinkIcon({ site }: { site: string }) {
-    if (site === 'BLOGTRUYEN.VN') return <img src='/icons/ic_blogtruyen.png' />
+    if (site === 'BLOGTRUYEN.VN') return <img width={32} src='/icons/ic_blogtruyen.png' />
     else if (site === 'MANGADEX.ORG') return <img src='/icons/ic_mangadex.svg' />
     else if (site === 'HAKO.RE' || site === 'DOCLN.NET') return <img src='/icons/ic_hako.png' />
     else if (site === 'FACEBOOK.COM') return <Iconify icon='logos:facebook' />

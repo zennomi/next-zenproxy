@@ -11,7 +11,7 @@ import parse from 'html-react-parser';
 import { getTitle } from '../../src/api/romcom';
 import Layout, { RootStyle } from '../../src/layouts';
 import { useTitle } from '../../src/hooks/useRomcom';
-import { Page, Image, Label, CarouselDots, CarouselArrows } from '../../src/components';
+import { Page, Image, Label, CarouselDots, CarouselArrows, Breadcrumbs } from '../../src/components';
 import { ColorSchema } from '../../src/theme/palette';
 import CustomStyle from '../../src/components/CustomStyle';
 import Routes from '../../src/routes';
@@ -21,7 +21,6 @@ import PageNotFound from '../404';
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const queryClient = new QueryClient()
     const id = context.query.id as string;
-    console.log(id)
     await queryClient.prefetchQuery(['romcom-title', id], () => getTitle(id))
 
     return {
@@ -66,7 +65,12 @@ export default function RomComTitlePage({ titleId }: { titleId: string }) {
         <Page title={title?.name || "Manga RomCom"}>
             <RootStyle>
                 <Container>
-                    <Grid container spacing={2} sx={{ mb: 1 }}>
+                    <Breadcrumbs links={[
+                        { name: "Trang chủ", href: "/" },
+                        { name: "Thư viện RomCom", href: Routes.romcom.titles },
+                        { name: title?.name || "Manga RomCom" }
+                    ]} />
+                    <Grid container spacing={2} sx={{ my: 1 }}>
                         <Grid item xs={12} md={3}>
                             <CardSlider sx={{ mx: 'auto', mb: 2 }}>
                                 <Slider ref={carouselRef} {...settings}>

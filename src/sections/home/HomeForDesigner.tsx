@@ -40,13 +40,13 @@ export default function HomeForDesigner() {
         <ContentStyle>
           <m.div variants={varFade({ distance: 40 }).inUp}>
             <Typography variant="overline" sx={{ opacity: 0.48 }}>
-              Professional Kit
+              Thư viện
             </Typography>
           </m.div>
 
           <m.div variants={varFade({ distance: 40 }).inUp}>
             <Typography variant="h2" sx={{ mt: 2, mb: 5 }}>
-              For Designer
+              RomCom
             </Typography>
           </m.div>
 
@@ -55,11 +55,10 @@ export default function HomeForDesigner() {
               size="large"
               variant="contained"
               endIcon={<Iconify icon={launchIcon} />}
-              target="_blank"
               rel="noopener"
-              href={Routes.figmaPreview}
+              href={Routes.romcom.titles}
             >
-              figma workspace
+              bú ngay
             </Button>
           </m.div>
         </ContentStyle>

@@ -70,7 +70,7 @@ export default function HomeTopProjects({ source }: Props) {
     const containerRef = useRef<HTMLDivElement>(null);
     const container = useBoundingClientRect(containerRef);
 
-    const { data } = useSection(source.id, 'top', 1);
+    const { data } = useSection(source.id, 'top_romcom', 1);
     const { results: mangas } = data ?? { results: [] };
 
     const offsetLeft = container?.left;

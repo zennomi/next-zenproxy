@@ -65,7 +65,7 @@ export default function HomeTopProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const container = useBoundingClientRect(containerRef);
 
-  const { data, error, isLoading } = useSection('mangadex', 'top', 1);
+  const { data, error, isLoading } = useSection('mangadex', 'top_romcom', 1);
   const { results: mangas } = data ?? { results: [] };
 
   const offsetLeft = container?.left;

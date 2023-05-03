@@ -14,7 +14,7 @@ import TitleFilterDrawer from "../../src/sections/romcom/TitleFilterDrawer";
 export default function RomcomPage() {
     const toggleButtonRef = useRef(null);
     const { query, push, isReady } = useRouter();
-    const { data, isLoading, error } = useTitles(stringify(query), isReady);
+    const { data, isLoading, error, isRefetching } = useTitles(stringify(query), isReady);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const handlePageChange = (event: any, page: number) => {
@@ -66,7 +66,7 @@ export default function RomcomPage() {
                     </Box>
                     <Grid container spacing={3}>
                         {
-                            isLoading ? Array(24).fill(
+                            (isLoading || isRefetching) ? Array(24).fill(
                                 <Grid item xs={4} md={2}>
                                     <TitleCardSkeleton />
                                 </Grid>

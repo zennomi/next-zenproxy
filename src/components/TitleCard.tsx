@@ -27,13 +27,13 @@ export default function TitleCard({ title }: { title: Title }) {
                         <Image src={resizeImage(title.coverArt[0], 300)} alt={title?.name} ratio='4/6' />
                         <OverlayStyle />
                         <CaptionStyle>
-                            <TextMaxLine line={2}>
-                                <Typography width="100%" variant="subtitle1" component="span">{title?.name}</Typography>
+                            <TextMaxLine line={2} lineHeight={1.25}>
+                                <span>{title?.name}</span>
                                 {
                                     title?.altTitle &&
-                                    <Typography width="100%" variant="body2" sx={{ opacity: 0.72 }} component="span">
+                                    <span style={{ opacity: 0.72 }}>
                                         {` - ${title?.altTitle}`}
-                                    </Typography>
+                                    </span>
                                 }
                             </TextMaxLine>
                         </CaptionStyle>
@@ -48,7 +48,7 @@ export default function TitleCard({ title }: { title: Title }) {
                                 opacity: 0.9,
                                 [theme.breakpoints.down('md')]: {
                                     fontSize: 12,
-                                    borderRadius: 1
+                                    borderRadius: 0.5,
                                 }
                             })} />
                     </CardActionArea>
@@ -76,19 +76,6 @@ const CaptionStyle = styled(CardActionArea)(({ theme }) => ({
     justifyContent: 'space-between',
     color: theme.palette.common.white,
     padding: theme.spacing(1),
-    [theme.breakpoints.down('md')]: {
-        "& .css-wbyhs2-MuiTypography-root": {
-            fontSize: 12,
-            lineHeight: 1
-        },
-        "& .css-1c5ddyz-MuiTypography-root": {
-            fontSize: 12,
-            lineHeight: 1
-        },
-        "& .css-mht6sy-MuiTypography-root, ": {
-            lineHeight: 1
-        }
-    }
 }));
 
 const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (

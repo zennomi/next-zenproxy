@@ -86,7 +86,7 @@ export class NHentai extends ZenSource {
   id = 'nhentai';
   name = 'NhenTai';
   icon = 'Nhentai.png';
-  description = 'Nhện tái tuổi thơ.';
+  description = 'Only Vanila';
   contentRating = ContentRating.ADULT;
   websiteBaseURL = 'https://nhentai.net';
   language = LanguageCode.ENGLISH;
@@ -94,6 +94,7 @@ export class NHentai extends ZenSource {
   getSection = async (sectionId: string, page: number) => {
     switch (sectionId) {
       case 'top':
+      case 'top_romcom':
         return await this.getViewMoreItems('popular', { page });
       case 'new_romcom':
         const request = createRequestObject({

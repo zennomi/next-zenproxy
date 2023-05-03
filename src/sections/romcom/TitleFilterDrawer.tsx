@@ -53,7 +53,6 @@ export default function TitleFilterDrawer({ isOpen, onClose }: { isOpen: boolean
     if (query.tags) currentFilter.tags = (query.tags as string).split(",");
     if (query.excludedGenres) currentFilter.excludedGenres = (query.excludedGenres as string).split(",");
     if (query.excludedTags) currentFilter.excludedTags = (query.excludedTags as string).split(",");
-    console.log(currentFilter)
     const defaultValues = useMemo(
         () => ({
             query: currentFilter?.query || '',
