@@ -18,6 +18,8 @@ import Routes from '../../src/routes';
 import TitleLinks from '../../src/sections/romcom/TitleLinks';
 import PageNotFound from '../404';
 
+const regexForStripHTML = /(<([^>]+)>)/ig;
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const queryClient = new QueryClient()
     const id = context.query.id as string;
@@ -62,7 +64,17 @@ export default function RomComTitlePage({ titleId }: { titleId: string }) {
     if (error) return <PageNotFound />
 
     return (
-        <Page title={title?.name || "Manga RomCom"}>
+        <Page title={title?.name || "Manga RomCom"}
+            meta={
+                <>
+                    <meta property="og:title" content={title?.name || "Manga RomCom"} />
+                    <meta property="og:type" content="article" />
+                    <meta property="og:image" content={title?.coverArt?.[0] || "https://telegraph-image-bak.pages.dev/file/005019a5b28c88d1a013e.jpg"} />
+                    <meta property="og:url" content={`https://zenno.moe/romcom/${title?._id || ""}`} />
+                    <meta property="og:description" content={title?.description?.replaceAll(regexForStripHTML, '') || "Thông tin về bộ romcom này"} />
+                </>
+            }
+        >
             <RootStyle>
                 <Container>
                     <Breadcrumbs links={[
@@ -176,7 +188,7 @@ function StatusLabel({ status = 'ongoing' }) {
 }
 
 const CardSlider = styled(Card)(({ theme }) => ({
-        [theme.breakpoints.down('md')]: {
-            width: '70%',
-        },
-    }))
+    [theme.breakpoints.down('md')]: {
+        width: '70%',
+    },
+}))

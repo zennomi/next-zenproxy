@@ -34,7 +34,16 @@ export default function RomcomPage() {
     }
 
     return (
-        <Page title="Thư viện RomCom của Zennomi">
+        <Page title="Thư viện RomCom của Zennomi"
+            meta={
+                <>
+                    <meta property="og:title" content="Thư viện RomCom" />
+                    <meta property="og:image" content="https://telegraph-image-bak.pages.dev/file/005019a5b28c88d1a013e.jpg" />
+                    <meta property="og:url" content="https://zenno.moe/romcom/" />
+                    <meta property="og:description" content="Anh em có thể tìm kiếm romcom theo sở thích tại đây..." />
+                </>
+            }
+        >
             <RootStyle>
                 <Container sx={{ py: 2 }}>
                     <Breadcrumbs links={[

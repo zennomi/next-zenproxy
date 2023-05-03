@@ -51,6 +51,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_tan
 
 
 
+const regexForStripHTML = /(<([^>]+)>)/ig;
 const getServerSideProps = async (context)=>{
     const queryClient = new _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__.QueryClient();
     const id = context.query.id;
@@ -95,6 +96,30 @@ function RomComTitlePage({ titleId  }) {
     if (error) return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_404__WEBPACK_IMPORTED_MODULE_14__["default"], {});
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_src_components__WEBPACK_IMPORTED_MODULE_10__/* .Page */ .T3, {
         title: title?.name || "Manga RomCom",
+        meta: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+            children: [
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                    property: "og:title",
+                    content: title?.name || "Manga RomCom"
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                    property: "og:type",
+                    content: "article"
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                    property: "og:image",
+                    content: title?.coverArt?.[0] || "https://telegraph-image-bak.pages.dev/file/005019a5b28c88d1a013e.jpg"
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                    property: "og:url",
+                    content: `https://zenno.moe/romcom/${title?._id || ""}`
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                    property: "og:description",
+                    content: title?.description?.replaceAll(regexForStripHTML, "") || "Th\xf4ng tin v\u1EC1 b\u1ED9 romcom n\xe0y"
+                })
+            ]
+        }),
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_src_layouts__WEBPACK_IMPORTED_MODULE_8__/* .RootStyle */ .i, {
             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_5__.Container, {
                 children: [
