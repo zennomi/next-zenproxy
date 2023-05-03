@@ -17,52 +17,36 @@ import {
     //getRecommendedIds
 } from './MangaDexSimilarManga'
 
-export const getLanguages = async (stateManager: SourceStateManager): Promise<string[]> => {
-    return (await stateManager.retrieve('languages') as string[]) ?? MDLanguages.getDefault()
-}
+export const getLanguages = async (stateManager: SourceStateManager): Promise<string[]> => (await stateManager.retrieve('languages') as string[]) ?? MDLanguages.getDefault()
 
-export const getRatings = async (stateManager: SourceStateManager): Promise<string[]> => {
-    return (await stateManager.retrieve('ratings') as string[]) ?? MDRatings.getDefault()
-}
+export const getRatings = async (stateManager: SourceStateManager): Promise<string[]> => (await stateManager.retrieve('ratings') as string[]) ?? MDRatings.getDefault()
 
-export const getDataSaver = async (stateManager: SourceStateManager): Promise<boolean> => {
-    return (await stateManager.retrieve('data_saver') as boolean) ?? false
-}
+export const getDataSaver = async (stateManager: SourceStateManager): Promise<boolean> => (await stateManager.retrieve('data_saver') as boolean) ?? false
 
-export const getSkipSameChapter = async (stateManager: SourceStateManager): Promise<boolean> => {
-    return (await stateManager.retrieve('skip_same_chapter') as boolean) ?? false
-}
+export const getSkipSameChapter = async (stateManager: SourceStateManager): Promise<boolean> => (await stateManager.retrieve('skip_same_chapter') as boolean) ?? false
 
-export const contentSettings = (stateManager: SourceStateManager): NavigationButton => {
-    return createNavigationButton({
+export const contentSettings = (stateManager: SourceStateManager): NavigationButton => createNavigationButton({
         id: 'content_settings',
         value: '',
         label: 'Content Settings',
         form: createForm({
-            onSubmit: (values: any) => {
-                return Promise.all([
+            onSubmit: (values: any) => Promise.all([
                     stateManager.store('languages', values.languages),
                     stateManager.store('ratings', values.ratings),
                     stateManager.store('data_saver', values.data_saver),
                     stateManager.store('skip_same_chapter', values.skip_same_chapter)
-                ]).then()
-            },
-            validate: () => {
-                return Promise.resolve(true)
-            },
-            sections: () => {
-                return Promise.resolve([
+                ]).then(),
+            validate: () => Promise.resolve(true),
+            sections: () => Promise.resolve([
                     createSection({
                         id: 'content',
                         footer: 'When enabled, same chapters from different scanlation group will not be shown.',
-                        rows: () => {
-                            return Promise.all([
+                        rows: () => Promise.all([
                                 getLanguages(stateManager),
                                 getRatings(stateManager),
                                 getDataSaver(stateManager),
                                 getSkipSameChapter(stateManager)
-                            ]).then(async values => {
-                                return [
+                            ]).then(async values => [
                                     createSelect({
                                         id: 'languages',
                                         label: 'Languages',
@@ -91,27 +75,17 @@ export const contentSettings = (stateManager: SourceStateManager): NavigationBut
                                         label: 'Skip Same Chapter',
                                         value: values[3]
                                     })
-                                ]
-                            })
-                        }
+                                ])
                     })
                 ])
-            }
         })
     })
-}
 
-export const getHomepageThumbnail = async (stateManager: SourceStateManager): Promise<string> => {
-    return (await stateManager.retrieve('homepage_thumbnail') as string) ?? MDImageQuality.getDefault('homepage')
-}
+export const getHomepageThumbnail = async (stateManager: SourceStateManager): Promise<string> => (await stateManager.retrieve('homepage_thumbnail') as string) ?? MDImageQuality.getDefault('homepage')
 
-export const getSearchThumbnail = async (stateManager: SourceStateManager): Promise<string> => {
-    return (await stateManager.retrieve('search_thumbnail') as string) ?? MDImageQuality.getDefault('search')
-}
+export const getSearchThumbnail = async (stateManager: SourceStateManager): Promise<string> => (await stateManager.retrieve('search_thumbnail') as string) ?? MDImageQuality.getDefault('search')
 
-export const getMangaThumbnail = async (stateManager: SourceStateManager): Promise<string> => {
-    return (await stateManager.retrieve('manga_thumbnail') as string) ?? MDImageQuality.getDefault('manga')
-}
+export const getMangaThumbnail = async (stateManager: SourceStateManager): Promise<string> => (await stateManager.retrieve('manga_thumbnail') as string) ?? MDImageQuality.getDefault('manga')
 
 export const getAccessToken = async (stateManager: SourceStateManager): Promise<{
     accessToken: string
@@ -276,8 +250,7 @@ export const accountSettings = async (stateManager: SourceStateManager, requestM
                 return [
                     createSection({
                         id: 'introspect',
-                        rows: async () => {
-                            return Object.keys(accessToken.tokenBody).map(key => {
+                        rows: async () => Object.keys(accessToken.tokenBody).map(key => {
                                 const value = accessToken.tokenBody[key]
 
                                 return createMultilineLabel({
@@ -286,7 +259,6 @@ export const accountSettings = async (stateManager: SourceStateManager, requestM
                                     value: Array.isArray(value) ? value.join('\n') : `${value}`
                                 })
                             })
-                        }
                     }),
                     createSection({
                         id: 'refresh_button_section',
@@ -321,33 +293,25 @@ export const accountSettings = async (stateManager: SourceStateManager, requestM
     })
 }
 
-export const thumbnailSettings = (stateManager: SourceStateManager): NavigationButton => {
-    return createNavigationButton({
+export const thumbnailSettings = (stateManager: SourceStateManager): NavigationButton => createNavigationButton({
         id: 'thumbnail_settings',
         value: '',
         label: 'Thumbnail Quality',
         form: createForm({
-            onSubmit: (values: any) => {
-                return Promise.all([
+            onSubmit: (values: any) => Promise.all([
                     stateManager.store('homepage_thumbnail', values.homepage_thumbnail[0]),
                     stateManager.store('search_thumbnail', values.search_thumbnail[0]),
                     stateManager.store('manga_thumbnail', values.manga_thumbnail[0]),
-                ]).then()
-            },
-            validate: () => {
-                return Promise.resolve(true)
-            },
-            sections: () => {
-                return Promise.resolve([
+                ]).then(),
+            validate: () => Promise.resolve(true),
+            sections: () => Promise.resolve([
                     createSection({
                         id: 'thumbnail',
-                        rows: () => {
-                            return Promise.all([
+                        rows: () => Promise.all([
                                 getHomepageThumbnail(stateManager),
                                 getSearchThumbnail(stateManager),
                                 getMangaThumbnail(stateManager)
-                            ]).then(async values => {
-                                return [
+                            ]).then(async values => [
                                     createSelect({
                                         id: 'homepage_thumbnail',
                                         label: 'Homepage Thumbnail',
@@ -375,23 +339,17 @@ export const thumbnailSettings = (stateManager: SourceStateManager): NavigationB
                                         allowsMultiselect: false,
                                         minimumOptionCount: 1
                                     })
-                                ]
-                            })
-                        }
+                                ])
                     })
                 ])
-            }
         })
     })
-}
 
-export const resetSettings = (stateManager: SourceStateManager): Button => {
-    return createButton({
+export const resetSettings = (stateManager: SourceStateManager): Button => createButton({
         id: 'reset',
         label: 'Reset to Default',
         value: '',
-        onTap: () => {
-            return Promise.all([
+        onTap: () => Promise.all([
                 stateManager.store('languages', null),
                 stateManager.store('ratings', null),
                 stateManager.store('data_saver', null),
@@ -404,52 +362,38 @@ export const resetSettings = (stateManager: SourceStateManager): Button => {
                 stateManager.store('enabled_recommendations', null),
                 stateManager.store('amount_of_recommendations', null)
             ]).then()
-        }
     })
-}
 
 export const getEnabledHomePageSections = async (stateManager: SourceStateManager): Promise<string[]> => {
     const enabled_homepage_sections: string[] = await stateManager.retrieve('enabled_homepage_sections') as string[]
     return enabled_homepage_sections != undefined && enabled_homepage_sections.length > 0 ? enabled_homepage_sections : MDHomepageSections.getDefault()
 }
 
-export const getEnabledRecommendations = async (stateManager: SourceStateManager): Promise<boolean> => {
-    return (await stateManager.retrieve('enabled_recommendations') as boolean) ?? false
-}
+export const getEnabledRecommendations = async (stateManager: SourceStateManager): Promise<boolean> => (await stateManager.retrieve('enabled_recommendations') as boolean) ?? false
 
-export const getAmountRecommendations = async (stateManager: SourceStateManager): Promise<number> => {
-    return (await stateManager.retrieve('amount_of_recommendations') as number) ?? 5
-}
+export const getAmountRecommendations = async (stateManager: SourceStateManager): Promise<number> => (await stateManager.retrieve('amount_of_recommendations') as number) ?? 5
 
-export const homepageSettings = (stateManager: SourceStateManager): NavigationButton => {
-    return createNavigationButton({
+export const homepageSettings = (stateManager: SourceStateManager): NavigationButton => createNavigationButton({
         id: 'homepage_settings',
         value: '',
         label: 'Homepage Settings',
         form: createForm({
-            onSubmit: (values: any) => {
-                return Promise.all([
+            onSubmit: (values: any) => Promise.all([
                     stateManager.store('enabled_homepage_sections', values.enabled_homepage_sections),
                     // The `as boolean` seems required to prevent Paperback from throwing
                     // `Invalid type for key value; expected `Bool` got `Optional<JSValue>``
                     stateManager.store('enabled_recommendations', values.enabled_recommendations as boolean),
                     stateManager.store('amount_of_recommendations', values.amount_of_recommendations),
                     sliceRecommendedIds(stateManager, values.amount_of_recommendations),
-                ]).then()
-            },
-            validate: () => {
-                return Promise.resolve(true)
-            },
-            sections: () => {
-                return Promise.resolve([
+                ]).then(),
+            validate: () => Promise.resolve(true),
+            sections: () => Promise.resolve([
                     createSection({
                         id: 'homepage_sections_section',
                         //footer: 'Which sections should be shown on the homepage',
-                        rows: () => {
-                            return Promise.all([
+                        rows: () => Promise.all([
                                 getEnabledHomePageSections(stateManager),
-                            ]).then(async values => {
-                                return [
+                            ]).then(async values => [
                                     createSelect({
                                         id: 'enabled_homepage_sections',
                                         label: 'Homepage sections',
@@ -459,22 +403,18 @@ export const homepageSettings = (stateManager: SourceStateManager): NavigationBu
                                         allowsMultiselect: true,
                                         minimumOptionCount: 0
                                     }),
-                                ]
-                            })
-                        }
+                                ])
                     }),
                     createSection({
                         id: 'recommendations_settings_section',
                         header: 'Titles recommendations',
                         footer: 'Recommendation are based on recently read chapters and shown on the homepage',
-                        rows: () => {
-                            return Promise.all([
+                        rows: () => Promise.all([
                                 getEnabledRecommendations(stateManager),
                                 getAmountRecommendations(stateManager),
                                 // Can be used to debug recommended ids
                                 //getRecommendedIds(stateManager)
-                            ]).then(async values => {
-                                return [
+                            ]).then(async values => [
                                     createSwitch({
                                         id: 'enabled_recommendations',
                                         label: 'Enable recommendations',
@@ -492,11 +432,9 @@ export const homepageSettings = (stateManager: SourceStateManager): NavigationBu
                                         id: 'reset_recommended_ids',
                                         label: 'Reset recommended titles',
                                         value: '',
-                                        onTap: () => {
-                                            return Promise.all([
+                                        onTap: () => Promise.all([
                                                 stateManager.store('recommendedIds', null),
                                             ]).then()
-                                        }
                                     })
                                     // Can be used to debug recommended ids
                                     //createMultilineLabel({
@@ -505,12 +443,8 @@ export const homepageSettings = (stateManager: SourceStateManager): NavigationBu
                                     //    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                                     //    label: values[2]!.toString(),
                                     //}),
-                                ]
-                            })
-                        }
+                                ])
                     }),
                 ])
-            }
         })
     })
-}

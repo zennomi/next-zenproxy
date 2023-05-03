@@ -147,9 +147,7 @@ export class NHentai extends ZenSource {
         return request;
       },
 
-      interceptResponse: async (response: Response): Promise<Response> => {
-        return response;
-      },
+      interceptResponse: async (response: Response): Promise<Response> => response,
     },
   });
 

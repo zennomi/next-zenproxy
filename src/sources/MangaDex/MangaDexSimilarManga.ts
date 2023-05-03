@@ -5,12 +5,12 @@ import {
     getAmountRecommendations
 } from './MangaDexSettings'
 
-export const getRecommendedIds = async (stateManager: SourceStateManager): Promise<string[]> => {
+export const getRecommendedIds = async (stateManager: SourceStateManager): Promise<string[]> => 
     // Return the list of ids that should be used for recommendations
     // We don't need to check the length of the list. If the max length was changed by the user, 
     // the list should have been modified
-    return (await stateManager.retrieve('recommendedIds') as string[]) ?? []
-}
+     (await stateManager.retrieve('recommendedIds') as string[]) ?? []
+
 
 export const sliceRecommendedIds = async (stateManager: SourceStateManager, amount: number): Promise<void> => {
     // Only keep `amount` elements in the recommendation list

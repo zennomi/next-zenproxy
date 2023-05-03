@@ -9,18 +9,18 @@ export interface UpdatedManga {
 }
 
 export const generateSearch = (query: SearchRequest): string => {
-    let keyword: string = query.title ?? "";
+    const keyword: string = query.title ?? "";
     return encodeURI(keyword);
 }
 
 export const parseSearch = ($: CheerioAPI): MangaTile[] => {
     const collectedIds: string[] = [];
     const mangas: MangaTile[] = [];
-    for (let obj of $('p:not(:first-child)', '.list').toArray()) {
-        let title = $(`a`, obj).text().trim();
-        let subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
+    for (const obj of $('p:not(:first-child)', '.list').toArray()) {
+        const title = $(`a`, obj).text().trim();
+        const subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
         const image = $('img', $(obj).next()).attr('src') ?? "";
-        let id = $(`a`, obj).attr('href') ?? title;
+        const id = $(`a`, obj).attr('href') ?? title;
         if (!collectedIds.includes(id)) { //ko push truyện trùng nhau
             mangas.push(createMangaTile({
                 id: encodeURI(id),
@@ -34,15 +34,15 @@ export const parseSearch = ($: CheerioAPI): MangaTile[] => {
     return mangas;
 }
 
-export const parseViewMore = ($: CheerioAPI, select: Number): MangaTile[] => {
+export const parseViewMore = ($: CheerioAPI, select: number): MangaTile[] => {
     const manga: MangaTile[] = [];
     const collectedIds: string[] = [];
     if (select === 1) {
-        for (let obj of $('.row', '.list-mainpage .storyitem').toArray()) {
-            let title = $(`h3.title > a`, obj).text().trim();
-            let subtitle = $(`div:nth-child(2) > div:nth-child(4) > span:nth-child(1) > .color-red`, obj).text();
+        for (const obj of $('.row', '.list-mainpage .storyitem').toArray()) {
+            const title = $(`h3.title > a`, obj).text().trim();
+            const subtitle = $(`div:nth-child(2) > div:nth-child(4) > span:nth-child(1) > .color-red`, obj).text();
             const image = $(`div:nth-child(1) > a > img`, obj).attr('src');
-            let id = $(`div:nth-child(1) > a`, obj).attr('href') ?? title;
+            const id = $(`div:nth-child(1) > a`, obj).attr('href') ?? title;
             if (!collectedIds.includes(id)) { //ko push truyện trùng nhau
                 manga.push(createMangaTile({
                     id: id,
@@ -54,11 +54,11 @@ export const parseViewMore = ($: CheerioAPI, select: Number): MangaTile[] => {
             }
         }
     } else {
-        for (let obj of $('p:not(:first-child)', '.list').toArray()) {
-            let title = $(`a`, obj).text().trim();
-            let subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
+        for (const obj of $('p:not(:first-child)', '.list').toArray()) {
+            const title = $(`a`, obj).text().trim();
+            const subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
             const image = $('img', $(obj).next()).attr('src') ?? "";
-            let id = $(`a`, obj).attr('href') ?? title;
+            const id = $(`a`, obj).attr('href') ?? title;
             if (!collectedIds.includes(id)) { //ko push truyện trùng nhau
                 manga.push(createMangaTile({
                     id: id,
@@ -92,9 +92,7 @@ export const isLastPage = ($: CheerioAPI): boolean => {
     return isLast;
 }
 
-export const decodeHTMLEntity = (str: string): string => {
-    return entities.decodeHTML(str);
-}
+export const decodeHTMLEntity = (str: string): string => entities.decodeHTML(str)
 
 // decodeHTMLEntity(str: string): string { //hàm của bato.to
 //     return str.replace(/&#(\d+);/g, function (match, dec) {

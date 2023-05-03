@@ -15,12 +15,8 @@ export abstract class ZenSource extends Source {
   abstract websiteBaseURL: string;
   abstract language?: string;
   abstract contentRating: ContentRating;
-  getMangaInternalURL = (mangaId: string) => {
-    return `/${this.id}/${mangaId}`;
-  };
-  getChapterInternalURL = (mangaId: string, chapterId: string) => {
-    return `/${this.id}/${mangaId}/${chapterId}`;
-  };
+  getMangaInternalURL = (mangaId: string) => `/${this.id}/${mangaId}`;
+  getChapterInternalURL = (mangaId: string, chapterId: string) => `/${this.id}/${mangaId}/${chapterId}`;
   abstract getSection?(sectionId: string, page: number): Promise<PagedResults | undefined>;
 }
 

@@ -659,11 +659,9 @@ export class MangaDex extends ZenSource {
             switch (section.section.id) {
               case 'latest_updates': {
                 const coversMapping = await this.getCoversMapping(
-                  json.data.map((x: any) => {
-                    return x.relationships
+                  json.data.map((x: any) => x.relationships
                       .filter((x: any) => x.type == 'manga')
-                      .map((x: any) => x.id)[0];
-                  }),
+                      .map((x: any) => x.id)[0]),
                   ratings
                 );
                 section.section.items = await parseChapterList(

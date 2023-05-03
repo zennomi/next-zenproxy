@@ -15,7 +15,7 @@ export class Parser {
 
     protected convertTime(timeAgo: string): Date {
         let time: Date
-        let trimmed: number = Number((/\d*/.exec(timeAgo) ?? [])[0])
+        let trimmed = Number((/\d*/.exec(timeAgo) ?? [])[0])
         trimmed = (trimmed == 0 && timeAgo.includes('a')) ? 1 : trimmed
         if (timeAgo.includes('giây') || timeAgo.includes('secs')) {
             time = new Date(Date.now() - trimmed * 1000) // => mili giây (1000 ms = 1s)
@@ -29,23 +29,23 @@ export class Parser {
             time = new Date(Date.now() - trimmed * 31556952000)
         } else {
             if (timeAgo.includes(":")) {
-                let split = timeAgo.split(' ');
-                let H = split[0]; //vd => 21:08
-                let D = split[1]; //vd => 25/08 
-                let fixD = D.split('/');
-                let finalD = fixD[1] + '/' + fixD[0] + '/' + new Date().getFullYear();
+                const split = timeAgo.split(' ');
+                const H = split[0]; //vd => 21:08
+                const D = split[1]; //vd => 25/08 
+                const fixD = D.split('/');
+                const finalD = fixD[1] + '/' + fixD[0] + '/' + new Date().getFullYear();
                 time = new Date(finalD + ' ' + H);
             } else {
-                let split = timeAgo.split('/'); //vd => 05/12/18
+                const split = timeAgo.split('/'); //vd => 05/12/18
                 time = new Date(split[1] + '/' + split[0] + '/' + '20' + split[2]);
             }
         }
         return time
     }
     parseMangaDetails($: any, mangaId: string): Manga {
-        let tags: Tag[] = [];
+        const tags: Tag[] = [];
 
-        for (let obj of $('li.kind > p.col-xs-8 > a').toArray()) {
+        for (const obj of $('li.kind > p.col-xs-8 > a').toArray()) {
             const label = $(obj).text();
             const id = $(obj).attr('href')?.split('/')[4] ?? label;
             tags.push(createTag({
@@ -72,12 +72,12 @@ export class Parser {
 
     parseChapterList($: any, mangaId: string): Chapter[] {
         const chapters: Chapter[] = [];
-        for (let obj of $('div.list-chapter > nav > ul > li.row:not(.heading)').toArray()) {
-            let time = $('div.col-xs-4', obj).text();
-            let group = $('div.col-xs-3', obj).text();
-            let name = $('div.chapter a', obj).text();
-            let chapNum = parseFloat($('div.chapter a', obj).text().split(' ')[1]);
-            let timeFinal = this.convertTime(time);
+        for (const obj of $('div.list-chapter > nav > ul > li.row:not(.heading)').toArray()) {
+            const time = $('div.col-xs-4', obj).text();
+            const group = $('div.col-xs-3', obj).text();
+            const name = $('div.chapter a', obj).text();
+            const chapNum = parseFloat($('div.chapter a', obj).text().split(' ')[1]);
+            const timeFinal = this.convertTime(time);
             chapters.push(createChapter(<Chapter>{
                 id: $('div.chapter a', obj).attr('href').split("/")[6],
                 chapNum: chapNum,
@@ -94,9 +94,9 @@ export class Parser {
 
     parseChapterDetails($: any): string[] {
         const pages: string[] = [];
-        for (let obj of $('div.reading-detail > div.page-chapter > img').toArray()) {
+        for (const obj of $('div.reading-detail > div.page-chapter > img').toArray()) {
             if (!obj.attribs['data-original']) continue;
-            let link = obj.attribs['data-original'];
+            const link = obj.attribs['data-original'];
             if (link.indexOf('http') === -1) {//nếu link ko có 'http'
                 pages.push('http:' + obj.attribs['data-original']);
             } else {
@@ -178,9 +178,9 @@ export class Parser {
     }
 
     parseFeaturedSection($: any): MangaTile[] {
-        let featuredItems: MangaTile[] = [];
+        const featuredItems: MangaTile[] = [];
 
-        for (let manga of $('div.item', 'div.altcontent1').toArray()) {
+        for (const manga of $('div.item', 'div.altcontent1').toArray()) {
             const title = $('.slide-caption > h3 > a', manga).text();
             const id = $('a', manga).attr('href')?.split('/').pop();
             const image = $('a > img.lazyOwl', manga).attr('data-src');
@@ -200,9 +200,9 @@ export class Parser {
     }
 
     parsePopularSection($: any): MangaTile[] {
-        let viewestItems: MangaTile[] = [];
+        const viewestItems: MangaTile[] = [];
 
-        for (let manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
+        for (const manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
             const title = $('figure.clearfix > figcaption > h3 > a', manga).first().text();
             const id = $('figure.clearfix > div.image > a', manga).attr('href')?.split('/').pop();
             const image = $('figure.clearfix > div.image > a > img', manga).first().attr('data-original');
@@ -239,8 +239,8 @@ export class Parser {
     }
 
     parseNewUpdatedSection($: any): MangaTile[] {
-        let newUpdatedItems: MangaTile[] = [];
-        for (let manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
+        const newUpdatedItems: MangaTile[] = [];
+        for (const manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
             const title = $('figure.clearfix > figcaption > h3 > a', manga).first().text();
             const id = $('figure.clearfix > div.image > a', manga).attr('href')?.split('/').pop();
             const image = $('figure.clearfix > div.image > a > img', manga).first().attr('data-original');
@@ -258,8 +258,8 @@ export class Parser {
     }
 
     parseNewAddedSection($: any): MangaTile[] {
-        let newAddedItems: MangaTile[] = [];
-        for (let manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
+        const newAddedItems: MangaTile[] = [];
+        for (const manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
             const title = $('figure.clearfix > figcaption > h3 > a', manga).first().text();
             const id = $('figure.clearfix > div.image > a', manga).attr('href')?.split('/').pop();
             const image = $('figure.clearfix > div.image > a > img', manga).first().attr('data-original');
@@ -277,8 +277,8 @@ export class Parser {
     }
 
     parseFullSection($: any): MangaTile[] {
-        let fullItems: MangaTile[] = [];
-        for (let manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
+        const fullItems: MangaTile[] = [];
+        for (const manga of $('div.item', 'div.row').toArray().splice(0, 20)) {
             const title = $('figure.clearfix > figcaption > h3 > a', manga).first().text();
             const id = $('figure.clearfix > div.image > a', manga).attr('href')?.split('/').pop();
             const image = $('figure.clearfix > div.image > a > img', manga).first().attr('data-original');

@@ -175,10 +175,8 @@ function StatusLabel({ status = 'ongoing' }) {
     return (<Label color={color} variant='filled'>{status.toUpperCase()}</Label>)
 }
 
-const CardSlider = styled(Card)(({ theme }) => {
-    return {
+const CardSlider = styled(Card)(({ theme }) => ({
         [theme.breakpoints.down('md')]: {
             width: '70%',
         },
-    }
-})
+    }))

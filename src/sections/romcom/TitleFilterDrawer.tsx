@@ -124,12 +124,12 @@ export default function TitleFilterDrawer({ isOpen, onClose }: { isOpen: boolean
                             <Grid container spacing={0.5}>
                                 <Grid item xs={6}><RHFSelect name="type" label="Hình thức">
                                     {[...TYPE_OPTION, 'all'].map((status) => (
-                                        <option>{status}</option>
+                                        <option key={status}>{status}</option>
                                     ))}
                                 </RHFSelect></Grid>
                                 <Grid item xs={6}><RHFSelect name="status" label="Trạng thái">
                                     {[...STATUS_OPTION, 'all'].map((status) => (
-                                        <option>{status}</option>
+                                        <option key={status}>{status}</option>
                                     ))}
                                 </RHFSelect></Grid>
                             </Grid>
@@ -212,7 +212,7 @@ export default function TitleFilterDrawer({ isOpen, onClose }: { isOpen: boolean
                         />
                         <RHFSelect name="sortBy" label="Xếp theo">
                             {SORT_OPTION.map(({ name, value }) => (
-                                <option value={value}>{name}</option>
+                                <option key={value} value={value}>{name}</option>
                             ))}
                         </RHFSelect>
                         <div>

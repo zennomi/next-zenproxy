@@ -13,7 +13,7 @@ export function capitalizeFirstLetter(string: string) {
 }
 
 export const generateSearch = (query: SearchRequest): string => {
-    let keyword: string = query.title ?? "";
+    const keyword: string = query.title ?? "";
     return encodeURI(keyword);
 }
 
@@ -21,11 +21,11 @@ export const parseSearch = ($: CheerioAPI, set: any): MangaTile[] => {
     const collectedIds: string[] = [];
     const mangas: MangaTile[] = [];
     if (set === 1) {
-        for (let obj of $('.c-tabs-item__content', '.tab-content-wrap').toArray()) {
-            let title = $(`.post-title > h3 > a`, obj).text().trim();
-            let subtitle = $(`.chapter > a`, obj).text().trim();
+        for (const obj of $('.c-tabs-item__content', '.tab-content-wrap').toArray()) {
+            const title = $(`.post-title > h3 > a`, obj).text().trim();
+            const subtitle = $(`.chapter > a`, obj).text().trim();
             const image = $('.c-image-hover > a > img', obj).attr('data-src') ?? $('.c-image-hover > a > img', obj).attr('src');
-            let id = $(`.c-image-hover > a`, obj).attr('href') ?? title;
+            const id = $(`.c-image-hover > a`, obj).attr('href') ?? title;
             if (!collectedIds.includes(id)) { //ko push truyện trùng nhau
                 mangas.push(createMangaTile({
                     id: id,
@@ -41,11 +41,11 @@ export const parseSearch = ($: CheerioAPI, set: any): MangaTile[] => {
             }
         }
     } else {
-        for (let obj of $('.page-listing-item > .row > .col-12', '.tab-content-wrap').toArray()) {
-            let title = $(`.post-title > h3 > a`, obj).text().trim();
-            let subtitle = $(`.chapter > a`, obj).text().trim();
+        for (const obj of $('.page-listing-item > .row > .col-12', '.tab-content-wrap').toArray()) {
+            const title = $(`.post-title > h3 > a`, obj).text().trim();
+            const subtitle = $(`.chapter > a`, obj).text().trim();
             const image = $('.c-image-hover > a > img', obj).attr('data-src') ?? "";
-            let id = $(`.c-image-hover > a`, obj).attr('href') ?? title;
+            const id = $(`.c-image-hover > a`, obj).attr('href') ?? title;
             if (!collectedIds.includes(id)) { //ko push truyện trùng nhau
                 mangas.push(createMangaTile({
                     id: id,
@@ -65,15 +65,15 @@ export const parseSearch = ($: CheerioAPI, set: any): MangaTile[] => {
     return mangas;
 }
 
-export const parseViewMore = ($: CheerioAPI, select: Number): MangaTile[] => {
+export const parseViewMore = ($: CheerioAPI, select: number): MangaTile[] => {
     const manga: MangaTile[] = [];
     const collectedIds: string[] = [];
     if (select === 1 || select === 2 || select === 0) {
-        for (let obj of $('.c-tabs-item__content', '.tab-content-wrap').toArray()) {
-            let title = $(`.post-title > h3 > a`, obj).text().trim();
-            let subtitle = $(`.chapter > a`, obj).text().trim();
+        for (const obj of $('.c-tabs-item__content', '.tab-content-wrap').toArray()) {
+            const title = $(`.post-title > h3 > a`, obj).text().trim();
+            const subtitle = $(`.chapter > a`, obj).text().trim();
             const image = $('.c-image-hover > a > img', obj).attr('data-src') ?? $('.c-image-hover > a > img', obj).attr('src');
-            let id = $(`.c-image-hover > a`, obj).attr('href') ?? title;
+            const id = $(`.c-image-hover > a`, obj).attr('href') ?? title;
             if (!collectedIds.includes(id)) { //ko push truyện trùng nhau
                 manga.push(createMangaTile({
                     id: id,
@@ -107,13 +107,11 @@ export const isLastPage = ($: CheerioAPI): boolean => {
     return isLast;
 }
 
-export const decodeHTMLEntity = (str: string): string => {
-    return entities.decodeHTML(str);
-}
+export const decodeHTMLEntity = (str: string): string => entities.decodeHTML(str)
 
 export const convertTime = (timeAgo: string): Date => {
     let time: Date
-    let trimmed: number = Number((/\d*/.exec(timeAgo) ?? [])[0])
+    let trimmed = Number((/\d*/.exec(timeAgo) ?? [])[0])
     trimmed = (trimmed == 0 && timeAgo.includes('a')) ? 1 : trimmed
     if (timeAgo.includes('giây') || timeAgo.includes('secs')) {
         time = new Date(Date.now() - trimmed * 1000) // => mili giây (1000 ms = 1s)
@@ -127,14 +125,14 @@ export const convertTime = (timeAgo: string): Date => {
         time = new Date(Date.now() - trimmed * 31556952000)
     } else {
         if (timeAgo.includes(":")) {
-            let split = timeAgo.split(' ');
-            let H = split[0]; //vd => 21:08
-            let D = split[1]; //vd => 25/08 
-            let fixD = D.split('/');
-            let finalD = fixD[1] + '/' + fixD[0] + '/' + new Date().getFullYear();
+            const split = timeAgo.split(' ');
+            const H = split[0]; //vd => 21:08
+            const D = split[1]; //vd => 25/08 
+            const fixD = D.split('/');
+            const finalD = fixD[1] + '/' + fixD[0] + '/' + new Date().getFullYear();
             time = new Date(finalD + ' ' + H);
         } else {
-            let split = timeAgo.split('/'); //vd => 05/12/18
+            const split = timeAgo.split('/'); //vd => 05/12/18
             time = new Date(split[1] + '/' + split[0] + '/' + split[2]);
         }
     }

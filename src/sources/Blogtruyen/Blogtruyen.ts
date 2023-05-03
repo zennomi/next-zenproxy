@@ -73,9 +73,7 @@ export class Blogtruyen extends ZenSource {
         return request;
       },
 
-      interceptResponse: async (response: Response): Promise<Response> => {
-        return response;
-      },
+      interceptResponse: async (response: Response): Promise<Response> => response,
     },
   });
 
@@ -108,11 +106,11 @@ export class Blogtruyen extends ZenSource {
       method: 'GET',
     });
     const data = await this.requestManager.schedule(request, 1);
-    let $ = this.cheerio.load(data.data);
-    let tags: Tag[] = [];
+    const $ = this.cheerio.load(data.data);
+    const tags: Tag[] = [];
     let creator = '';
     let status = 1; //completed, 1 = Ongoing
-    let desc = $('.content').text();
+    const desc = $('.content').text();
 
     for (const test of $('p', '.description').toArray()) {
       switch ($(test).clone().children().remove().end().text().trim()) {
@@ -155,7 +153,7 @@ export class Blogtruyen extends ZenSource {
     const response = await this.requestManager.schedule(request, 1);
     const $ = this.cheerio.load(response.data);
     const chapters: Chapter[] = [];
-    var i = 0;
+    let i = 0;
     for (const obj of $('#list-chapters > p').toArray()) {
       i++;
       const getTime = $('.publishedDate', obj).text().trim().split(' ');
@@ -188,11 +186,11 @@ export class Blogtruyen extends ZenSource {
     });
 
     const response = await this.requestManager.schedule(request, 1);
-    let $ = this.cheerio.load(response.data);
+    const $ = this.cheerio.load(response.data);
     const pages: string[] = [];
-    for (let obj of $('#content > img').toArray()) {
+    for (const obj of $('#content > img').toArray()) {
       if (!obj.attribs['src']) continue;
-      let link = proxyImage(obj.attribs['src'], DOMAIN);
+      const link = proxyImage(obj.attribs['src'], DOMAIN);
       pages.push(link);
     }
 
@@ -206,37 +204,37 @@ export class Blogtruyen extends ZenSource {
   }
 
   async getHomePageSections(sectionCallback: (section: HomeSection) => void): Promise<void> {
-    let featured: HomeSection = createHomeSection({
+    const featured: HomeSection = createHomeSection({
       id: 'featured',
       title: 'Truyện Đề Cử',
       type: HomeSectionType.featured,
     });
-    let hot: HomeSection = createHomeSection({
+    const hot: HomeSection = createHomeSection({
       id: 'hot',
       title: 'Truyện xem nhiều nhất',
       view_more: true,
     });
-    let newUpdated: HomeSection = createHomeSection({
+    const newUpdated: HomeSection = createHomeSection({
       id: 'new_updated',
       title: 'Truyện mới cập nhật',
       view_more: true,
     });
-    let newAdded: HomeSection = createHomeSection({
+    const newAdded: HomeSection = createHomeSection({
       id: 'new_added',
       title: 'Truyện mới đăng',
       view_more: false,
     });
-    let full: HomeSection = createHomeSection({
+    const full: HomeSection = createHomeSection({
       id: 'full',
       title: 'Đủ bộ',
       view_more: true,
     });
-    let girl: HomeSection = createHomeSection({
+    const girl: HomeSection = createHomeSection({
       id: 'girl',
       title: 'Con gái',
       view_more: true,
     });
-    let boy: HomeSection = createHomeSection({
+    const boy: HomeSection = createHomeSection({
       id: 'boy',
       title: 'Con trai',
       view_more: true,
@@ -260,8 +258,8 @@ export class Blogtruyen extends ZenSource {
     });
     let data = await this.requestManager.schedule(request, 1);
     let $ = this.cheerio.load(data.data);
-    let featuredItems: MangaTile[] = [];
-    for (let manga of $('a', 'div#storyPinked').toArray()) {
+    const featuredItems: MangaTile[] = [];
+    for (const manga of $('a', 'div#storyPinked').toArray()) {
       const title = $('p:first-child', $(manga).next()).text().trim();
       const id = $(manga).attr('href');
       const image = $('img', manga).attr('src')?.replace('300x300', '500x') ?? '';
@@ -285,14 +283,14 @@ export class Blogtruyen extends ZenSource {
       url: 'https://blogtruyen.vn/ajax/Search/AjaxLoadListManga?key=tatca&orderBy=3&p=1',
       method: 'GET',
     });
-    let hotItems: MangaTile[] = [];
+    const hotItems: MangaTile[] = [];
     data = await this.requestManager.schedule(request, 1);
     $ = this.cheerio.load(data.data);
-    for (let obj of $('p:not(:first-child)', '.list').toArray()) {
-      let title = $(`a`, obj).text().trim();
-      let subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
+    for (const obj of $('p:not(:first-child)', '.list').toArray()) {
+      const title = $(`a`, obj).text().trim();
+      const subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
       const image = $('img', $(obj).next()).attr('src') ?? '';
-      let id = $(`a`, obj).attr('href') ?? title;
+      const id = $(`a`, obj).attr('href') ?? title;
       hotItems.push(
         createMangaTile({
           id: id.split('/')[1],
@@ -315,17 +313,17 @@ export class Blogtruyen extends ZenSource {
       url: 'https://blogtruyen.vn/thumb',
       method: 'GET',
     });
-    let newUpdatedItems: MangaTile[] = [];
+    const newUpdatedItems: MangaTile[] = [];
     data = await this.requestManager.schedule(request, 1);
     $ = this.cheerio.load(data.data);
-    for (let obj of $('.row', '.list-mainpage .storyitem').toArray().splice(0, 20)) {
-      let title = $(`h3.title > a`, obj).attr('title') ?? '';
-      let subtitle = $(
+    for (const obj of $('.row', '.list-mainpage .storyitem').toArray().splice(0, 20)) {
+      const title = $(`h3.title > a`, obj).attr('title') ?? '';
+      const subtitle = $(
         `div:nth-child(2) > div:nth-child(4) > span:nth-child(1) > .color-red`,
         obj
       ).text();
       const image = $(`div:nth-child(1) > a > img`, obj).attr('src');
-      let id = $(`div:nth-child(1) > a`, obj).attr('href') ?? title ?? '';
+      const id = $(`div:nth-child(1) > a`, obj).attr('href') ?? title ?? '';
       // if (!id || !subtitle) continue;
       newUpdatedItems.push(
         createMangaTile({
@@ -349,14 +347,14 @@ export class Blogtruyen extends ZenSource {
       url: 'https://blogtruyen.vn/thumb',
       method: 'GET',
     });
-    let newAddItems: MangaTile[] = [];
+    const newAddItems: MangaTile[] = [];
     data = await this.requestManager.schedule(request, 1);
     $ = this.cheerio.load(data.data);
-    for (let obj of $('a', '#top-newest-story').toArray()) {
-      let title = $(obj).attr('title')?.trim() ?? '';
+    for (const obj of $('a', '#top-newest-story').toArray()) {
+      const title = $(obj).attr('title')?.trim() ?? '';
       // let subtitle = $(`.info-bottom > span`, obj).text().split(":")[0].trim();
       const image = $(`img`, obj).attr('src');
-      let id = $(obj).attr('href') ?? title;
+      const id = $(obj).attr('href') ?? title;
       // if (!id || !subtitle) continue;
       newAddItems.push(
         createMangaTile({
@@ -382,14 +380,14 @@ export class Blogtruyen extends ZenSource {
       url: 'https://blogtruyen.vn/ajax/Category/AjaxLoadMangaByCategory?id=0&orderBy=5&p=1',
       method: 'GET',
     });
-    let fullItems: MangaTile[] = [];
+    const fullItems: MangaTile[] = [];
     data = await this.requestManager.schedule(request, 1);
     $ = this.cheerio.load(data.data);
-    for (let obj of $('p:not(:first-child)', '.list').toArray()) {
-      let title = $(`a`, obj).text().trim();
-      let subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
+    for (const obj of $('p:not(:first-child)', '.list').toArray()) {
+      const title = $(`a`, obj).text().trim();
+      const subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
       const image = $('img', $(obj).next()).attr('src') ?? '';
-      let id = $(`a`, obj).attr('href') ?? title;
+      const id = $(`a`, obj).attr('href') ?? title;
       fullItems.push(
         createMangaTile({
           id: id.split('/')[1],
@@ -412,14 +410,14 @@ export class Blogtruyen extends ZenSource {
       url: 'https://blogtruyen.vn/ajax/Category/AjaxLoadMangaByCategory?id=29&orderBy=5&p=1',
       method: 'GET',
     });
-    let girlItems: MangaTile[] = [];
+    const girlItems: MangaTile[] = [];
     data = await this.requestManager.schedule(request, 1);
     $ = this.cheerio.load(data.data);
-    for (let obj of $('p:not(:first-child)', '.list').toArray()) {
-      let title = $(`a`, obj).text().trim();
-      let subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
+    for (const obj of $('p:not(:first-child)', '.list').toArray()) {
+      const title = $(`a`, obj).text().trim();
+      const subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
       const image = $('img', $(obj).next()).attr('src') ?? '';
-      let id = $(`a`, obj).attr('href') ?? title;
+      const id = $(`a`, obj).attr('href') ?? title;
       girlItems.push(
         createMangaTile({
           id: id.split('/')[1],
@@ -442,14 +440,14 @@ export class Blogtruyen extends ZenSource {
       url: 'https://blogtruyen.vn/ajax/Category/AjaxLoadMangaByCategory?id=31&orderBy=5&p=1',
       method: 'GET',
     });
-    let boyItems: MangaTile[] = [];
+    const boyItems: MangaTile[] = [];
     data = await this.requestManager.schedule(request, 1);
     $ = this.cheerio.load(data.data);
-    for (let obj of $('p:not(:first-child)', '.list').toArray()) {
-      let title = $(`a`, obj).text().trim();
-      let subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
+    for (const obj of $('p:not(:first-child)', '.list').toArray()) {
+      const title = $(`a`, obj).text().trim();
+      const subtitle = 'Chương ' + $(`span:nth-child(2)`, obj).text().trim();
       const image = $('img', $(obj).next()).attr('src') ?? '';
-      let id = $(`a`, obj).attr('href') ?? title;
+      const id = $(`a`, obj).attr('href') ?? title;
       boyItems.push(
         createMangaTile({
           id: id.split('/')[1],
@@ -468,8 +466,8 @@ export class Blogtruyen extends ZenSource {
   }
 
   async getViewMoreItems(homepageSectionId: string, metadata: any): Promise<PagedResults> {
-    let page: number = metadata?.page ?? 1;
-    let param = '';
+    const page: number = metadata?.page ?? 1;
+    const param = '';
     let url = '';
     let select = 1;
     switch (homepageSectionId) {
@@ -515,7 +513,7 @@ export class Blogtruyen extends ZenSource {
   }
 
   async getSearchResults(query: SearchRequest, metadata: any): Promise<PagedResults> {
-    let page = metadata?.page ?? 1;
+    const page = metadata?.page ?? 1;
     const tags = query.includedTags?.map((tag) => tag.id) ?? [];
     const request = createRequestObject({
       url: encodeURI(
@@ -528,7 +526,7 @@ export class Blogtruyen extends ZenSource {
     });
 
     const data = await this.requestManager.schedule(request, 1);
-    let $ = this.cheerio.load(data.data);
+    const $ = this.cheerio.load(data.data);
     const tiles = parseSearch($);
 
     metadata = !isLastPage($) ? { page: page + 1 } : undefined;

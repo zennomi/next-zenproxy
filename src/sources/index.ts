@@ -35,14 +35,10 @@ _global.createRequestManager = (info: RequestManagerInfo) => {
   const instance = setupCache(axios.create());
   instance.interceptors.request.use(
     (config) => {
-      info.interceptor?.interceptRequest(<Request>config).then((req) => {
-        return Promise.resolve(req);
-      });
+      info.interceptor?.interceptRequest(<Request>config).then((req) => Promise.resolve(req));
       return config;
     },
-    (err) => {
-      return Promise.reject(err);
-    }
+    (err) => Promise.reject(err)
   );
 
   instance.interceptors.request.use((config) => {
@@ -71,9 +67,7 @@ _global.createRequestManager = (info: RequestManagerInfo) => {
 
   const result: RequestManager = {
     ...info,
-    schedule: async (request: Request, retryCount: number) => {
-      return instance.request(<AxiosRequestConfig>request);
-    },
+    schedule: async (request: Request, retryCount: number) => instance.request(<AxiosRequestConfig>request),
   };
   return result;
 };
@@ -85,9 +79,7 @@ _global.createSourceStateManager = (info: SourceStateManagerInfo) => {
   const store = async (key: string, value: unknown) => {
     _global.sourceStateManager[key] = value;
   };
-  const retrieve = async (key: string) => {
-    return _global.sourceStateManager[key];
-  };
+  const retrieve = async (key: string) => _global.sourceStateManager[key];
   const result: SourceStateManagerInfo = {
     ...info,
     keychain: {

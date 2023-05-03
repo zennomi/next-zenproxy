@@ -110,9 +110,7 @@ export class NetTruyen extends ZenSource {
         return request;
       },
 
-      interceptResponse: async (response: Response): Promise<Response> => {
-        return response;
-      },
+      interceptResponse: async (response: Response): Promise<Response> => response,
     },
   });
 
@@ -123,7 +121,7 @@ export class NetTruyen extends ZenSource {
       method: 'GET',
     });
     const data = await this.requestManager.schedule(request, 1);
-    let $ = this.cheerio.load(data.data);
+    const $ = this.cheerio.load(data.data);
     return this.parser.parseMangaDetails($, mangaId);
   }
 
@@ -134,7 +132,7 @@ export class NetTruyen extends ZenSource {
       method: 'GET',
     });
     const data = await this.requestManager.schedule(request, 1);
-    let $ = this.cheerio.load(data.data);
+    const $ = this.cheerio.load(data.data);
     return this.parser.parseChapterList($, mangaId);
   }
 
@@ -144,7 +142,7 @@ export class NetTruyen extends ZenSource {
       method: 'GET',
     });
     const data = await this.requestManager.schedule(request, 1);
-    let $ = this.cheerio.load(data.data);
+    const $ = this.cheerio.load(data.data);
     const pages = this.parser.parseChapterDetails($);
     return createChapterDetails({
       pages: pages.map((p) => proxyImage(p, DOMAIN)),
@@ -155,7 +153,7 @@ export class NetTruyen extends ZenSource {
   }
 
   async getSearchResults(query: SearchRequest, metadata: any): Promise<PagedResults> {
-    let page = metadata?.page ?? 1;
+    const page = metadata?.page ?? 1;
 
     const search = {
       genres: '',
@@ -209,7 +207,7 @@ export class NetTruyen extends ZenSource {
       method: 'GET',
     });
     const data = await this.requestManager.schedule(request, 1);
-    let $ = this.cheerio.load(data.data);
+    const $ = this.cheerio.load(data.data);
     const tiles = this.parser.parseSearchResults($);
 
     metadata = !isLastPage($) ? { page: page + 1 } : undefined;
@@ -221,32 +219,32 @@ export class NetTruyen extends ZenSource {
   }
 
   async getHomePageSections(sectionCallback: (section: HomeSection) => void): Promise<void> {
-    let featured: HomeSection = createHomeSection({
+    const featured: HomeSection = createHomeSection({
       id: 'featured',
       title: 'Truyện Đề Cử',
       type: HomeSectionType.featured,
     });
-    let viewest: HomeSection = createHomeSection({
+    const viewest: HomeSection = createHomeSection({
       id: 'viewest',
       title: 'Truyện Xem Nhiều Nhất',
       view_more: true,
     });
-    let hot: HomeSection = createHomeSection({
+    const hot: HomeSection = createHomeSection({
       id: 'hot',
       title: 'Truyện Hot Nhất',
       view_more: true,
     });
-    let newUpdated: HomeSection = createHomeSection({
+    const newUpdated: HomeSection = createHomeSection({
       id: 'new_updated',
       title: 'Truyện Mới Cập Nhật',
       view_more: true,
     });
-    let newAdded: HomeSection = createHomeSection({
+    const newAdded: HomeSection = createHomeSection({
       id: 'new_added',
       title: 'Truyện Mới Thêm Gần Đây',
       view_more: true,
     });
-    let full: HomeSection = createHomeSection({
+    const full: HomeSection = createHomeSection({
       id: 'full',
       title: 'Truyện Đã Hoàn Thành',
       view_more: true,
@@ -335,7 +333,7 @@ export class NetTruyen extends ZenSource {
   }
 
   async getViewMoreItems(homepageSectionId: string, metadata: any): Promise<PagedResults> {
-    let page: number = metadata?.page ?? 1;
+    const page: number = metadata?.page ?? 1;
     let param = '';
     let url = '';
     switch (homepageSectionId) {
@@ -415,7 +413,7 @@ export class NetTruyen extends ZenSource {
       //     id: item,
       //     time: timeUpdate
       // })
-      for (let manga of $('div.item', 'div.row').toArray()) {
+      for (const manga of $('div.item', 'div.row').toArray()) {
         const id = $('figure.clearfix > div.image > a', manga).attr('href')?.split('/').pop();
         const time = $('figure.clearfix > figcaption > ul > li.chapter:nth-of-type(1) > i', manga)
           .last()

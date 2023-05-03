@@ -47,6 +47,7 @@ type NextPageWithLayout = NextPage & {
 
 interface MyAppProps extends AppProps {
   Component: NextPageWithLayout;
+  pageProps: any
 }
 
 export default function MyApp(props: MyAppProps) {

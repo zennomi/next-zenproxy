@@ -7,9 +7,7 @@ const normalizeUrl = (url: string) => {
   return url.startsWith("http") ? url : `https://${url}`;
 };
 
-const extractEncodedUrl = (prefix: string, path: string) => {
-  return path.replace(prefix, "").split("?")[0];
-};
+const extractEncodedUrl = (prefix: string, path: string) => path.replace(prefix, "").split("?")[0];
 
 const base64UrlDecode = (string: string) => {
   const base64String = string.replace(/-/g, "+").replace(/_/g, "/");
@@ -21,19 +19,13 @@ const base64UrlEncode = (string: string) => {
   return base64String.replace(/\+/g, "-").replace(/\//g, "_");
 };
 
-const getCacheHeaders = (privacy: string, maxAge: string, sMaxAge: string) => {
-  return `${privacy}, max-age=${maxAge}, s-maxage=${sMaxAge}`;
-};
+const getCacheHeaders = (privacy: string, maxAge: string, sMaxAge: string) => `${privacy}, max-age=${maxAge}, s-maxage=${sMaxAge}`;
 
-const sleep = (duration: number) => {
-  return new Promise((resolve) => {
+const sleep = (duration: number) => new Promise((resolve) => {
     setTimeout(resolve, duration);
   });
-};
 
-const proxyImage = (url: string, host: string) => {
-  return `https://services.f-ck.me/v1/image/${btoa(url).replace(/\+/g, "-").replace(/\//g, "_")}?host=${host}`
-}
+const proxyImage = (url: string, host: string) => `https://services.f-ck.me/v1/image/${btoa(url).replace(/\+/g, "-").replace(/\//g, "_")}?host=${host}`
 
 export {
   normalizeUrl,

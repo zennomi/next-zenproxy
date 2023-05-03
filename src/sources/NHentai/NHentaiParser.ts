@@ -16,9 +16,7 @@ import { Gallery,
 
 const typeMap: { [key: string]: string } = { 'j': 'jpg', 'p': 'png', 'g': 'gif' }
 
-const typeOfImage = (image: ImagePageObject): string => {
-    return typeMap[image.t] ?? ''
-}
+const typeOfImage = (image: ImagePageObject): string => typeMap[image.t] ?? ''
 
 const getArtist = (gallery: Gallery): string => {
     const tags: TagObject[] = gallery.tags
@@ -61,8 +59,7 @@ export const parseGallery = (data: Gallery): Manga => {
     })
 }
 
-export const parseChapterDetails = (data: Gallery, mangaId: string): ChapterDetails => {
-    return createChapterDetails({
+export const parseChapterDetails = (data: Gallery, mangaId: string): ChapterDetails => createChapterDetails({
         id: mangaId,
         mangaId: mangaId,
         longStrip: false,
@@ -71,7 +68,6 @@ export const parseChapterDetails = (data: Gallery, mangaId: string): ChapterDeta
             return `https://i.nhentai.net/galleries/${data.media_id}/${i+1}.${type}`
         }),
     })
-}
 
 export const parseSearch = (data: QueryResponse): MangaTile[] => {
     const tiles: MangaTile[] = []
@@ -90,8 +86,7 @@ export const parseSearch = (data: QueryResponse): MangaTile[] => {
     return tiles
 }
 
-export const parseGalleryIntoChapter = (data: Gallery, mangaId: string): Chapter => {
-    return createChapter({
+export const parseGalleryIntoChapter = (data: Gallery, mangaId: string): Chapter => createChapter({
         id: mangaId,
         mangaId: mangaId,
         chapNum: 1,
@@ -99,4 +94,3 @@ export const parseGalleryIntoChapter = (data: Gallery, mangaId: string): Chapter
         langCode: NHLanguages.getPBCode(getLanguage(data)),
         time: new Date(data.upload_date * 1000),
     })
-}

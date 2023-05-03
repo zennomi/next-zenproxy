@@ -9,20 +9,20 @@ export interface UpdatedManga {
 }
 
 export const generateSearch = (query: SearchRequest): string => {
-    let keyword: string = query.title ?? "";
+    const keyword: string = query.title ?? "";
     return encodeURI(keyword);
 }
 
 export const parseSearch = ($: CheerioAPI, query: any): MangaTile[] => {
     const manga: MangaTile[] = [];
     // const collectedIds: string[] = [];
-    var loop = [];
+    let loop = [];
     if (query.title) {
         loop = $('div.py-2', '.row').toArray();
     } else {
         loop = $('div.py-2', '.col-md-8 .row').toArray();
     }
-    for (let obj of loop) {
+    for (const obj of loop) {
         const title = $('a', obj).last().text().trim();
         const id = $('a', obj).last().attr('href') ?? title;
         const image = $('div', obj).first().css('background');
@@ -46,7 +46,7 @@ export const parseSearch = ($: CheerioAPI, query: any): MangaTile[] => {
 export const parseViewMore = ($: CheerioAPI): MangaTile[] => {
     const manga: MangaTile[] = [];
     // const collectedIds: string[] = [];
-    for (let obj of $('div.col-md-3', '.main .col-md-8 > .row').toArray()) {
+    for (const obj of $('div.col-md-3', '.main .col-md-8 > .row').toArray()) {
         const title = $('a', obj).last().text().trim();
         const id = $('a', obj).last().attr('href') ?? title;
         const image = $('div', obj).first().css('background');

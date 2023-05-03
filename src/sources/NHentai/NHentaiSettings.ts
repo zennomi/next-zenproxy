@@ -10,20 +10,13 @@ import {
     NHSortOrders,
 } from './NHentaiHelper'
 
-export const getLanguages = async (stateManager: SourceStateManager): Promise<string[]> => {
-    return (await stateManager.retrieve('languages') as string[]) ?? NHLanguages.getDefault()
-}
+export const getLanguages = async (stateManager: SourceStateManager): Promise<string[]> => (await stateManager.retrieve('languages') as string[]) ?? NHLanguages.getDefault()
 
-export const getExtraArgs = async (stateManager: SourceStateManager): Promise<string> => {
-    return (await stateManager.retrieve('extra_args') as string) ?? ''
-}
+export const getExtraArgs = async (stateManager: SourceStateManager): Promise<string> => (await stateManager.retrieve('extra_args') as string) ?? ''
 
-export const getSortOrders = async (stateManager: SourceStateManager): Promise<string[]> => {
-    return (await stateManager.retrieve('sort_order') as string[]) ?? NHSortOrders.getDefault()
-}
+export const getSortOrders = async (stateManager: SourceStateManager): Promise<string[]> => (await stateManager.retrieve('sort_order') as string[]) ?? NHSortOrders.getDefault()
 
-export const settings = (stateManager: SourceStateManager): NavigationButton => {
-    return createNavigationButton({
+export const settings = (stateManager: SourceStateManager): NavigationButton => createNavigationButton({
         id: 'settings',
         value: '',
         label: 'Content Settings',
@@ -36,13 +29,11 @@ export const settings = (stateManager: SourceStateManager): NavigationButton => 
                 ])
             },
             validate: async () => true,
-            sections: () => {
-                return Promise.resolve([
+            sections: () => Promise.resolve([
                     createSection({
                         id: 'content',
                         footer: 'Modify the nhentai experience to your liking.',
-                        rows: () => {
-                            return Promise.all([
+                        rows: () => Promise.all([
                                 getLanguages(stateManager),
                                 getSortOrders(stateManager),
                                 getExtraArgs(stateManager),
@@ -73,16 +64,12 @@ export const settings = (stateManager: SourceStateManager): NavigationButton => 
                                     value: values[2],
                                 })
                             ])
-                        }
                     })
                 ])
-            }
         })
     })
-}
 
-export const resetSettings = (stateManager: SourceStateManager): Button => {
-    return createButton({
+export const resetSettings = (stateManager: SourceStateManager): Button => createButton({
         id: 'reset',
         label: 'Reset to Default',
         value: '',
@@ -94,4 +81,3 @@ export const resetSettings = (stateManager: SourceStateManager): Button => {
             ])
         }
     })
-}
