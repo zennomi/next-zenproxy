@@ -1,10 +1,8 @@
 import { Link } from "@mui/material";
 import { Box, Button, Card, CardContent, CardHeader, CircularProgress, OutlinedInput, styled, Typography } from "@mui/material";
-import axios from "axios";
 import NextLink from "next/link";
 import { ReactElement, useState } from "react";
 import { Image, Page } from "../../src/components";
-import * as config from "../../src/config";
 import useCuuTromChapter from "../../src/hooks/useCuuTromChapter";
 import Layout from "../../src/layouts";
 

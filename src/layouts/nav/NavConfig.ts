@@ -1,7 +1,6 @@
 // routes
 import Routes from '../../routes';
 // _data
-import { _tours, _jobs, _courses } from '../../../_data/mock';
 import sources from '../../sources';
 
 // ----------------------------------------------------------------------

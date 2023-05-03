@@ -1,7 +1,7 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { Link, Stack, AppBar, Divider, Container, FormControl, InputLabel, MenuItem, Select, Button, Box, InputBase, styled, alpha } from '@mui/material';
+import { AppBar, FormControl, MenuItem, Select, Button, Box, InputBase, styled, alpha } from '@mui/material';
 // config
 import { HEADER_DESKTOP_HEIGHT } from '../../config';
 // hooks
@@ -11,7 +11,6 @@ import { ToolbarStyle, ToolbarShadowStyle } from './HeaderToolbarStyle';
 import { ZenChapter, ZenManga } from '../../sources/types';
 import { useResponsive } from '../../hooks';
 import { Iconify } from '../../components';
-import Routes from '../../routes';
 
 // ----------------------------------------------------------------------
 
@@ -74,7 +73,7 @@ export default function ChapterBottomNav({ manga, chapters, chapter, handleChapt
                         >
                             {
                                 Object.values(chapters).map(chapter =>
-                                    <MenuItem value={chapter.id}>{chapter.name}</MenuItem>)
+                                    <MenuItem key={chapter.id} value={chapter.id}>{chapter.name}</MenuItem>)
                             }
                         </Select>
                     </FormControl>

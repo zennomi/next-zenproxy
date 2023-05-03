@@ -3,9 +3,8 @@ import { styled } from '@mui/material/styles';
 import { Typography, Box, Container, Stack } from '@mui/material';
 //
 import MangaTileCard from '../../components/MangaTileCard';
-import { MangaTile, Source } from 'paperback-extensions-common';
+import { MangaTile } from 'paperback-extensions-common';
 import { useRouter } from 'next/router';
-import { ZenSource } from '../../sources/types';
 import { useSection } from '../../hooks/useProxy';
 import { MangaTileSkeleton } from '@/components';
 

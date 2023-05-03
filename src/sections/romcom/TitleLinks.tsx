@@ -41,7 +41,7 @@ export default function TitleLinks({ links = [] }: { links: TitleLink[] | undefi
                         </TableHead>
                         <TableBody>
                             {links.map((row) => (
-                                <Row row={row} />
+                                <Row key={row.link} row={row} />
                             ))}
                         </TableBody>
                     </Table>
@@ -54,7 +54,7 @@ export default function TitleLinks({ links = [] }: { links: TitleLink[] | undefi
 function LinkIcon({ site }: { site: string }) {
     if (site === 'BLOGTRUYEN.VN') return <img width={32} src='/icons/ic_blogtruyen.png' />
     else if (site === 'MANGADEX.ORG') return <img src='/icons/ic_mangadex.svg' />
-    else if (site === 'HAKO.RE' || site === 'DOCLN.NET') return <img src='/icons/ic_hako.png' />
+    else if (site === 'HAKO.RE' || site === 'DOCLN.NET') return <img width={32} src='/icons/ic_hako.png' />
     else if (site === 'FACEBOOK.COM') return <Iconify icon='logos:facebook' />
     else if (site === 'GOOGLE-SENSEI') return <Iconify icon={'flat-color-icons:google'} />
     else if (site === 'TWITTER.COM') return <Iconify icon={'logos:twitter'} />

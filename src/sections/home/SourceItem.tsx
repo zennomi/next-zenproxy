@@ -1,14 +1,9 @@
 import { useState } from 'react';
 // icons
-import locationIcon from '@iconify/icons-carbon/location';
-import timeIcon from '@iconify/icons-carbon/time';
-import increaseLevel from '@iconify/icons-carbon/increase-level';
-import moneyIcon from '@iconify/icons-carbon/money';
-import userIcon from '@iconify/icons-carbon/user';
 // next
 import NextLink from 'next/link';
 // @mui
-import { Divider, Stack, Card, Typography, Grid, Link } from '@mui/material';
+import { Divider, Stack, Card, Typography, Link } from '@mui/material';
 // routes
 import Routes from '../../routes';
 import { ZenSource } from '../../sources/types';
@@ -16,9 +11,7 @@ import { ZenSource } from '../../sources/types';
 import {
   Image,
   Label,
-  Iconify,
   TextMaxLine,
-  TextIconLabel,
   FavoriteButton,
 } from '../../components';
 import { ContentRating } from 'paperback-extensions-common';
@@ -31,7 +24,7 @@ type Props = {
 
 export default function SourceItem({ source }: Props) {
   const {
-    id, name, icon, description, websiteBaseURL, language, contentRating
+    id, name, icon, description, websiteBaseURL, contentRating
   } = source;
 
   const [favorite, setFavorite] = useState(false);

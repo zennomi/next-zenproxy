@@ -1,4 +1,4 @@
-module.exports = [
+export default [
     "pretend lovers",
     "strong female lead",
     "adapted to anime",

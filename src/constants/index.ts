@@ -1,4 +1,4 @@
-export const TAG_OPTION = require("./tags");
+export * as TAG_OPTION from "./tags";
 
 export const TYPE_OPTION = ['novel', 'manga', 'anime', 'movie'];
 

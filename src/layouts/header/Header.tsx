@@ -2,18 +2,15 @@
 import NextLink from 'next/link';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Box, Stack, Button, AppBar, Divider, Container, Link } from '@mui/material';
+import { Box, Stack, Button, AppBar, Container, Link } from '@mui/material';
 // hooks
 import { useOffSetTop, useResponsive } from '../../hooks';
 // routes
-import Routes from '../../routes';
 // config
 import { HEADER_DESKTOP_HEIGHT } from '../../config';
 // components
 import { Logo, Label } from '../../components';
 //
-import Searchbar from '../Searchbar';
-import LanguagePopover from '../LanguagePopover';
 import { NavMobile, NavDesktop, navConfig } from '../nav';
 import { ToolbarStyle, ToolbarShadowStyle } from './HeaderToolbarStyle';
 

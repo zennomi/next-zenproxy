@@ -114,7 +114,7 @@ export default function RomComTitlePage({ titleId }: { titleId: string }) {
                                 {title?.altTitle?.toUpperCase()}
                             </Typography>
                             {
-                                title && title.staff.map(a => <Label sx={{ m: 0.5 }} variant='filled'>{a}</Label>)
+                                title && title.staff.map(a => <Label sx={{ m: 0.5 }} variant='filled' key={a}>{a}</Label>)
                             }
                             {
                                 title?.description &&
