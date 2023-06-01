@@ -1,9 +1,9 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/404": "pages/404.html",
   "/500": "pages/500.html",
+  "/_error": "pages/_error.js",
   "/[source]": "pages/[source].html",
   "/api/proxy/[source]/[manga]/[chapter]": "pages/api/proxy/[source]/[manga]/[chapter].js",
   "/api/proxy/[source]/[manga]/chapters": "pages/api/proxy/[source]/[manga]/chapters.js",
