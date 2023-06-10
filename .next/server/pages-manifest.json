@@ -17,13 +17,13 @@
   "/auth/verify-code": "pages/auth/verify-code.html",
   "/biya": "pages/biya.html",
   "/coming-soon": "pages/coming-soon.html",
-  "/cuutrom": "pages/cuutrom.html",
   "/cuutrom/mangas/[mangaId]/chapters/[chapterId]": "pages/cuutrom/mangas/[mangaId]/chapters/[chapterId].html",
+  "/cuutrom": "pages/cuutrom.html",
   "/imouto": "pages/imouto.html",
   "/": "pages/index.html",
   "/maintenance": "pages/maintenance.html",
   "/romcom": "pages/romcom.html",
-  "/[source]/[manga]": "pages/[source]/[manga].js",
   "/[source]/[manga]/[chapter]": "pages/[source]/[manga]/[chapter].js",
+  "/[source]/[manga]": "pages/[source]/[manga].js",
   "/romcom/[id]": "pages/romcom/[id].js"
 }
